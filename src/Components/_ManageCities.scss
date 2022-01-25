@@ -1,0 +1,36 @@
+.manage {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.city-list {
+  border: 1px solid grey;
+  padding: $pad2;
+  background-color: rgba($netural-color, 0.8);
+  .city-item {
+    padding: $pad1;
+  }
+
+  .delete-city {
+    float: right;
+  }
+
+  .city-item {
+    display: flex;
+    flex-direction: row;
+    .stats {
+      font-size: $font1;
+    }
+  }
+}
+
+.manage-bg {
+  padding: $pad3;
+  position: absolute;
+  background: url("../Assets/World.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 100vh;
+  height: 100vh;
+  z-index: -1;
+}

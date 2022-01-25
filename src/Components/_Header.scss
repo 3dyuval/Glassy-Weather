@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+
+  li {
+    display: inline-flex;
+    padding: 1em;
+    list-style: none;
+  }
+
+  .nav-active {
+    color: $active-color;
+    font-weight: bold;
+  }
+}
