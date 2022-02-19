@@ -1,29 +1,46 @@
 import React, { useState, useEffect } from "react"
-import useFetch from "../Helpers/useFetch"
+import useWeather from "../Helpers/useWeather"
 
 export default function CityData(WrappedComponent, name) {
   return props => {
     const [weather, setWeather] = useState([])
-    const [isLoading, setLoading] = useState(false)
-    const { fakeApi } = useFetch()
+    const [isLoading, setLoading] = useState(true)
+    const { getWeather, fakeApi } = useWeather()
 
-    function getWeather() {
+    function getData(cityName) {
       setLoading(true)
-      fakeApi(500, name).then(res => {
-        setWeather(res || "no data")
+      try {
+        const accessPoint = "/forecast.json"
+        const options = "&q=" + cityName + "&days=1"
+        getWeather(accessPoint, options).then(data => {
+          setWeather(() => data)
+          setLoading(false)
+        })
+      } catch {
+        err => console.log(err)
+      }
+    }
+
+    function handleWeatherUpdate() {
+      setLoading(true)
+      fakeApi(500, name).then(data => {
+        setWeather(data)
         setLoading(false)
       })
     }
 
+
     useEffect(() => {
-      getWeather()
+      let isMounted = true
+      if (isMounted) handleWeatherUpdate()
+      return () => { isMounted = false }
     }, [])
 
     return (
       <WrappedComponent
         weather={weather}
         isLoading={isLoading}
-        handleWeatherUpdate={getWeather}
+        handleWeatherUpdate={handleWeatherUpdate}
         {...props}
       ></WrappedComponent>
     )

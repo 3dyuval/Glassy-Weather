@@ -40,7 +40,6 @@ function Carousel({ children, cityList, setCurrentCity }) {
         <a.div
           className="inner"
           style={contentProps}
-          // style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {React.Children.map(children, (child, index) => {
             return React.cloneElement(child, { width: "100%" });

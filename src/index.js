@@ -1,8 +1,5 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./Components/App.component"
-// import Chart from "./D3/Chart";
+import App from "./App"
 
 ReactDOM.render(<App />, document.querySelector("#root"))
-
-// ReactDOM.render(<Chart />, document.querySelector("#root"));

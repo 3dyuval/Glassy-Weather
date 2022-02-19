@@ -1,48 +1,39 @@
-import React, { useEffect, useState } from "react"
-import { format, compareAsc } from "date-fns"
+import React from "react"
+import Hour from "./Hour"
+import { animated as a, useTrail } from "react-spring"
 
-export default function Hours({ weather }) {
-  const [temps, setTemps] = useState("")
+export default function Hours({ hours, isLoading }) {
 
-  useEffect(() => {
-    if (weather && weather.current !== undefined) {
-      const currentHours = getEvenHoursStartingPresentMoment(
-        weather.forecast.forecastday[0].hour
-      )
-      setTemps(mapHours())
-    }
-  }, [weather])
+  const mock = [...Array(12)].map(() => {   // empty [obj] for empty boxes
+    const o = { hour: "00:00", condition: { icon: null }, temp_c: 0 }
+    return o
+  })
 
-  const getEvenHoursStartingPresentMoment = hours => {
-    const now = new Date()
-    const filteredHours = []
-    for (let i = 0; i < hours.length; i++) {
-      if (compareAsc(new Date(hours[i].time), now) === 1) {
-        filteredHours.push(hours[i].time)
-      }
-    }
-    return filteredHours
+  function mapHours(data) {
+    return data.map((hour, index) => <Hour isLoading={isLoading} hour={hour} key={`hour${index}`} />)
   }
 
-  const mapHours = () => {
-    return weather.forecast.forecastday[0].hour.map((item, index) => {
-      return (
-        <div className="hour" key={`temp${index}`}>
-          <div className="hour">{format(new Date(item.time), "HH:mm")}</div>
-          <div className="single-temp">
-            <img className="icon" src={item.condition.icon} />
-            <div className="temp">{item.temp_c}</div>
-          </div>
-        </div>
-      )
+  if (isLoading) return <HoursAnimation isLoading={isLoading}>{mapHours(mock)}</HoursAnimation>
+  return <HoursAnimation isLoading={isLoading}>{mapHours(hours)}</HoursAnimation>
+}
+
+function HoursAnimation({ children, isLoading }) {
+  const hours = React.Children.toArray(children)
+  const [trail, api] = useTrail(hours.length,
+    () => ({
+      from: { opacity: 1 },
+      to: { opacity: 0.25 },
+      loop: true,
     })
-  }
+  )
 
-  if (!temps) return null
+  if (!isLoading) {
+    api.start({ opacity: 1, })
+  }
 
   return (
-    <>
-      <div className="chart-wrap">{temps && temps}</div>
-    </>
+    <div className="hours">
+      {trail.map((styles, index) => <a.div key={index} style={styles}>{hours[index]}</a.div>)}
+    </div>
   )
 }
