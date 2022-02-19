@@ -1,6 +1,6 @@
 {
   "name": "weatherapp",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,18 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "@parcel/transformer-sass": "^2.0.1",
-    "chart.js": "^3.6.2",
-    "d3": "^7.1.1",
     "date-fns": "^2.27.0",
-    "lodash": "^4.17.21",
-    "lodash.debounce": "^4.0.8",
-    "moment-timezone": "^0.5.34",
     "parcel": "^2.0.1",
     "react": "^17.0.2",
-    "react-chartjs-2": "^4.0.0",
     "react-router-dom": "^5.2.0",
     "react-spring": "^9.4.3",
-    "react-swipeable": "^6.2.0",
-    "snackbar": "^1.1.0"
+    "react-swipeable": "^6.2.0"
   }
 }
