@@ -1,4 +1,4 @@
-.chart-wrap {
+.hours {
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -14,14 +14,22 @@
 .hour {
   text-align: center;
   padding-bottom: $pad2;
+  .icon {
+    min-width: 64px;
+    min-height: 64px;
+    border: 0px;
+  }
+  &.is-loading {
+    min-height: 50px;
+  }
 }
 
-.single-temp {
+.rounded-box {
   //pos
   margin: 0.5em;
   padding: 0.75em 0.5em;
+  background: rgba($netural-color, 0.25);
   //col
-  background: rgba(243, 243, 243, 0.5);
   //txt
   //misc
   border-radius: 3em;

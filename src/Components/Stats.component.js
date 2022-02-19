@@ -1,56 +1,22 @@
 import React, { useState, useEffect } from "react"
 import { useSpring, animated as a } from "react-spring"
+import useWeather from "../Helpers/useWeather"
 
-export default function Stats(props) {
-  const { weather, isLoading } = props
+export default function Stats({ weatherStats, isLoading }) {
 
-  const [weatherStats, setWeatherStats] = useState([])
-  const [statParams, setStatParams] = useState([
-    { name: "Temp", param: "temp_c" },
-    { name: "Feels like", param: "feelslike_c" },
-    { name: "Precipitation", param: "precip_mm" },
-    { name: "Humidity", param: "humidity" },
-    { name: "Windspeed", param: "wind_kph" },
-  ])
-
-  useEffect(() => {
-    if (weather && weather.current !== undefined) {
-      setWeatherStats(getFilteredWeatherStatsFromParams(statParams))
-    }
-  }, [weather])
-
-  function getFilteredWeatherStatsFromParams(params) {
-    let list = []
-    params.forEach(item => {
-      const value = weather.current[item.param]
-      if (value !== undefined) {
-        list.push({
-          statName: item.name,
-          value: value,
-        })
-      }
-    })
-    return list
-  }
-
-  function mapStatsComponents(arr) {
-    return arr.map(({ statName, value }, index) => (
+  if (isLoading) return null
+  return <div className="stats comp3">
+    {weatherStats.map(({ statName, statValue }) =>
       <Stat
-        weather={weather}
-        isLoading={isLoading}
         statName={statName}
-        value={value}
-        key={`stat${index}`}
+        statValue={statValue}
+        key={`stat-${statName}`}
       />
-    ))
-  }
-
-  if (!weatherStats) return null
-  return <div className="stats comp3">{mapStatsComponents(weatherStats)}</div>
+    )}
+  </div>
 }
 
-function Stat(props) {
-  const { statName, value, unit, isLoading } = props
+function Stat({ statName, statValue, unit, isLoading }) {
 
   const { styles } = useSpring({ opacity: !isLoading ? 1 : 0 })
 
@@ -66,7 +32,7 @@ function Stat(props) {
         <span className="name">{statName ? statName : "stat"}</span>
       </div>
       <div className="valueContainer">
-        <span className="value">{value}</span>
+        <span className="value">{statValue}</span>
         <span className="unit">{unit}</span>
       </div>
     </a.div>

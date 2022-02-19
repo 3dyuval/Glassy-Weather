@@ -15,8 +15,8 @@ export function Cities(props) {
       {cityList.map(city => {
         const City = CityData(CityItem, city.name)
         return (
-          <CarouselItem key={city.id}>
-            <City key={city.id} cityName={city.name} />
+          <CarouselItem key={city.name}>
+            <City key={city.name} cityName={city.name} />
           </CarouselItem>
         )
       })}
