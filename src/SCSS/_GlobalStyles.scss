@@ -1,0 +1,30 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+$rad1: 4px;
+$rad2: 8px;
+$rad3: 12px;
+$rad4: 24px;
+
+$pad1: 1em;
+$pad2: 2em;
+$pad3: 3em;
+
+$font1: 0.875em;
+$font2: 1em;
+$font3: 1.125em;
+$font4: 1.5em;
+
+$dark-day-bg: rgba(56, 65, 83, 1);
+$dark-night-bg: rgba(32, 31, 46, 1);
+$dark-scheme-col: rgba(232, 232, 232, 1);
+
+$light-day-bg: rgba(244, 250, 255, 1);
+$light-day-frame: linear-gradient(
+  180deg,
+  rgba(245, 250, 255, 0.8) 0%,
+  rgba(233, 244, 255, 0.8) 100%
+);
+$light-night-bg: rgba(196, 196, 196, 1);
+$light-scheme-col: rgba(46, 49, 59, 1);
+
+$netural-color: rgb(120, 129, 170);
+$active-color: rgb(115, 140, 255);

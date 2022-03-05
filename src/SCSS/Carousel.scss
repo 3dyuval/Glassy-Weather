@@ -1,0 +1,34 @@
+@import "_GlobalStyles.scss";
+.carousel {
+  overflow: hidden;
+  width: 95vw;
+  border-radius: 1em;
+}
+
+.inner {
+  white-space: nowrap;
+}
+
+.carousel-item {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+
+  button {
+    margin: 8px;
+    border: 0px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1em;
+    font-size: 1em;
+  }
+
+  .active {
+    background-color: $active-color;
+    color: #fff;
+    border: none;
+  }
+}

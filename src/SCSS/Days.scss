@@ -1,0 +1,29 @@
+@import "GlobalStyles";
+
+.days {
+  width: auto;
+  background-color: $active-color;
+  padding: $pad1;
+  margin: $pad1;
+  border-radius: $rad2;
+  max-height: 200px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.day {
+  margin: $pad1;
+  padding: $pad2;
+  border-radius: $rad1;
+  background-color: $light-day-bg;
+  border: 1px solid $light-day-frame;
+
+  &.selectedDay {
+    border: 3px solid $netural-color;
+  }
+}
