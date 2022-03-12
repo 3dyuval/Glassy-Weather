@@ -25,12 +25,12 @@ export default function City(props) {
   return (<>
     <div className="city">
       <div style={{ margin: '2em' }} >
-        <input
+        {/* <input
           type="button"
           value={isLoading ? "loading..." : `Get Weather in ${cityName}`}
           disabled={isLoading}
           onClick={handleWeatherUpdate}
-        />
+        /> */}
         <div className="title">
           <h1>{cityName}</h1>
           <Hours hours={hours} isLoading={isLoading} />
