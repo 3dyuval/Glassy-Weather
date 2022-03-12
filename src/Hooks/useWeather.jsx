@@ -5,14 +5,12 @@ import useStorage from "./useStorage"
 
 export default function useWeather() {
 
-
-
-    function getWeather(accessPoint, options) {
-        const baseURL = "http://api.weatherapi.com/v1"
-        const apiKey = "?key=f2227dce13864693a89165508211212"
-        return fetch(baseURL + accessPoint + apiKey + options).then(response =>
-            response.json()
-        )
+    function getWeather(options) {
+        const baseURL = "http://api.weatherapi.com/v1/forecast.json?key="
+        return fetch(baseURL + import.meta.env.VITE_API_KEY + options)
+            .then(response =>
+                response.json()
+            )
     }
 
     function fakeAPI(ms, cityName) {

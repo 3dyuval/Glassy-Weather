@@ -1,40 +1,34 @@
 import React, { useState, useLayoutEffect, useEffect } from "react"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
-import ManageCities from "./Components/Layout/ManageCities.component"
 
-import Header from "./Components/Layout/Header.component"
-import NavBar from "./Components/Layout/NavBar"
-
-import Welcome from "./Components/Layout/Welcome.component"
-import Main from "./Components/Layout/Main.component"
 import "./Index.scss"
 import useStorage from "./Hooks/useStorage"
 
-
+import ManageCities from "./Components/Layout/ManageCities.component"
+import Header from "./Components/Layout/Header.component"
+import NavBar from "./Components/Layout/NavBar"
+import Welcome from "./Components/Layout/Welcome.component"
+import Main from "./Components/Layout/Main.component"
 
 export default function App() {
+
   const { getStorage, setUserConfig, getUserConfig, addCity } = useStorage()
   const [darkTheme, setDarkTheme] = useState(getUserConfig().config.darkMode)
-  // getStorage('cityList')
-  const [cityList, setCityList] = useState([])
+  const [cityList, setCityList] = useState(getStorage("cityList"))
   const [currentCity, setCurrentCity] = useState()
 
 
   function handleAddCity(itm) {
     const cityListFromStorage = addCity(itm)
-    console.log(cityListFromStorage)
-    setCityList(cityListFromStorage)
+    setCityList(cityList => cityListFromStorage)
   }
-
 
   useLayoutEffect(() => {
     document.title = `Weather in ${currentCity}`
+    //Todo - state containing 'weathercode'
+    // and pass it down to <CurrentConditionGraphic>
   }, [currentCity])
 
-  useEffect(() => {
-    const storage = getStorage("cityList")
-    setCityList(storage)
-  }, [])
 
   function handleThemeToggle() {
     setDarkTheme(!darkTheme)
@@ -59,18 +53,22 @@ export default function App() {
           <Route path="/manage">
             <ManageCities cityList={cityList} setCityList={setCityList} />
           </Route>
-
+          <Route path='/welcome'>
+          <Welcome
+              cityList={cityList}
+             handleAddCity={handleAddCity}
+             setCityList={setCityList} />
+          </Route>
           <Route>
-
+          { cityList == undefined || !cityList.length ? <Redirect to="/welcome" /> :
             <Main
               handleAddCity={handleAddCity}
               cityList={cityList}
               setCityList={setCityList}
               currentCity={currentCity}
               setCurrentCity={setCurrentCity}
-            />
+            />}
           </Route>
-
         </Switch>
 
       </div>

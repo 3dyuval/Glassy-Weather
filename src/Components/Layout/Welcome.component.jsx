@@ -8,7 +8,7 @@ export default function Welcome(props) {
 
   const suggestions = ["Tel Aviv", "Budapest", "Rome"]
 
-  // return null
+  // if (cityList === undefined || !cityList.length) return null
 
   return (<div className="welcome">
     <h1>What is your city?</h1>

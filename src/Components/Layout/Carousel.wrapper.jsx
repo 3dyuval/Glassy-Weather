@@ -8,6 +8,7 @@ export function CarouselItem({ children, width }) {
     <div className="carousel-item" style={{ width: width }}>
       {children}
     </div>
+
   );
 }
 

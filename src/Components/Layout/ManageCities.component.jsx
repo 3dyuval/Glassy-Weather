@@ -13,6 +13,7 @@ export default function ManageCities(props) {
     saveList(cityList)
   }, [cityList])
 
+
   return (
     <div className="manage">
       <h1>Manage Cities</h1>

@@ -15,12 +15,11 @@ export default function CityData(WrappedComponent, name) {
     function getData(cityName) {
       setLoading(true)
       try {
-        const accessPoint = "/forecast.json"
-        const options = "&q=" + cityName + "&days=1"
-        getWeather(accessPoint, options).then(data => {
-          setWeather(() => data)
-          setLoading(false)
-        })
+        getWeather("&q=" + cityName + "&days=3")
+          .then(data => {
+            setWeather(() => data)
+            setLoading(false)
+          })
       } catch {
         err => console.log(err)
       }

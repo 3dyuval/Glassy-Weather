@@ -33,6 +33,7 @@ export default function City(props) {
         /> */}
         <div className="title">
           <h1>{cityName}</h1>
+          <h2>{weather.length ? weather.location.localtime : ''}</h2>
           <Hours hours={hours} isLoading={isLoading} />
         </div>
         <Stats

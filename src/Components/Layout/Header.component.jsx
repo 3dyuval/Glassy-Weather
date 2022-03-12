@@ -1,6 +1,5 @@
 import React, { useLayoutEffect } from "react";
 import '../../SCSS/Header.scss'
-import condition from '../../Assets/WeatherConditions/11.mostly-cloudy-light.svg'
 
 
 
