@@ -5,15 +5,11 @@ import CityData from "../City/CityData.wrapper"
 import Welcome from "./Welcome.component"
 
 export default function Main(props) {
-  const { cityList, setCurrentCity } = props
+  const { cityList, setCurrentCity, handleAddCity } = props
 
-
-  if (!cityList || cityList.length === 0) {
-    return <Welcome />
-  }
+  if (cityList === undefined || !cityList.length) return <Welcome cityList={cityList} handleAddCity={handleAddCity} />
 
   return (<>
-
     <Carousel cityList={cityList} setCurrentCity={setCurrentCity}>
       {cityList.map(city => {
         const CityItem = CityData(City, city.name)

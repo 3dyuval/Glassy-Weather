@@ -3,16 +3,16 @@ import useStorage from "../../Hooks/useStorage"
 
 export default function AddCity(props) {
   const [cityInput, setCityInput] = useState("")
-  const { setCityList } = props
-  const { addCity, getCities } = useStorage()
+  const { setCityList, cityList } = props
+  const { addCity, getStorage } = useStorage()
 
   function handleAddCity(event) {
     event.preventDefault()
     if (!cityInput) {
       return
     } else {
-      addCity(cityInput)
-      setCityList(getCities())
+      const added = addCity(cityInput)
+      setCityList(added)
     }
   }
 

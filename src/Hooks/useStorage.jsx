@@ -5,15 +5,18 @@ function useStorage() {
 
   const addCity = cityName => {
     const currentList = getStorage(CITYLIST)
-    if (!currentList) {
-      return localStorage.setItem(
+    if (!currentList.length) {
+      const newCity = { name: cityName, id: 0 }
+      localStorage.setItem(
         CITYLIST,
         JSON.stringify([
-          { name: cityName, id: 0 },
+          newCity,
         ])
       )
+      console.log([newCity])
+      return [newCity]
     }
-    localStorage.setItem(
+    return localStorage.setItem(
       CITYLIST,
       JSON.stringify([
         ...currentList,
