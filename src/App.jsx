@@ -1,38 +1,54 @@
 import React, { useState, useLayoutEffect } from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import ManageCities from "./Components/Layout/ManageCities.component"
+
 import Header from "./Components/Layout/Header.component"
+import NavBar from "./Components/Layout/NavBar"
+
 import Welcome from "./Components/Layout/Welcome.component"
 import Main from "./Components/Layout/Main.component"
 import "./Index.scss"
 import useStorage from "./Hooks/useStorage"
+import CurrentConditionGraphic from "./Components/Layout/CurrentConditionGraphic"
+
 
 export default function App() {
-  const [theme, setTheme] = useState("light")
+  const { getStorage, setUserConfig, getUserConfig } = useStorage()
+  const [darkTheme, setDarkTheme] = useState(getUserConfig().config.darkMode)
 
-  const { getCities } = useStorage()
-  const [cityList, setCityList] = useState(() => getCities())
+  const [cityList, setCityList] = useState(() => getStorage("cityList"))
   const [currentCity, setCurrentCity] = useState()
+
 
   useLayoutEffect(() => {
     document.title = `Weather in ${currentCity}`
   }, [currentCity])
 
-  const showWelcome = () => {
-    if (!cityList || cityList.length === 0)
-      return <Welcome cityList={cityList} setCityList={setCityList} />
+  function handleThemeToggle() {
+    setDarkTheme(!darkTheme)
   }
+
+  useLayoutEffect(() => {
+    if (darkTheme === false) {
+      document.body.className = "light";
+    } else if (darkTheme === true) {
+      document.body.className = "dark";
+    }
+    setUserConfig({ darkMode: darkTheme })
+
+  }, [darkTheme]);
 
   return (
     <Router>
       <div className="app">
-        <Header theme={theme} setTheme={setTheme} />
+        <Header>
+          <NavBar handleThemeToggle={handleThemeToggle} darkTheme={darkTheme} />
+        </Header>
         <Switch>
           <Route path="/manage">
             <ManageCities cityList={cityList} setCityList={setCityList} />
           </Route>
           <Route>
-            {showWelcome()}
             <Main
               cityList={cityList}
               setCityList={setCityList}
@@ -41,6 +57,7 @@ export default function App() {
             />
           </Route>
         </Switch>
+
       </div>
     </Router>
   )

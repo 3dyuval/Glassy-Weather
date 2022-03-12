@@ -2,32 +2,27 @@ import React, { useState, useEffect } from "react"
 import Stats from "../Stats/Stats.component"
 import Hours from "../Stats/Hours.component"
 import useWeather from "../../Hooks/useWeather"
-import Days from "./Days.component"
+import Days from "../Stats/Days.component"
 import "../../SCSS/City.scss"
+import CurrentWeatherCondition from "../Layout/CurrentConditionGraphic"
 
-// TODO CityItem responsibility is only to compose the display data
-//TODO  STATS is only receiving  weather
-//TODO hours is only receiving  weather
-//TODO merge with CityData
-//TODO add component for Days (forecast)
 
 export default function City(props) {
   const { cityName, weather, handleWeatherUpdate, isLoading } = props
-  const { allHoursFromNow, getStatsValues } = useWeather();
-  const [hours, setHours] = useState([])
+  const { getStatsValues } = useWeather();
   const [weatherStats, setWeatherStats] = useState([])
+  const { useHours, useMockHours } = useWeather()
+  const [hours, setHours] = useState(useMockHours())
 
 
   useEffect(() => {
     if (!weather || weather.length == 0) return
-    const fromNow = allHoursFromNow(weather.forecast.forecastday[0].hour)
-    const next12hours = fromNow.slice(0, 11)
-    setHours(next12hours)
-    setWeatherStats(weatherStats => getStatsValues(weather))
+    setWeatherStats(weatherStats => getStatsValues(weather.current))
+    setHours((hours) => useHours(weather))
 
   }, [weather])
 
-  return (
+  return (<>
     <div className="city">
       <div style={{ margin: '2em' }} >
         <input
@@ -42,9 +37,13 @@ export default function City(props) {
         </div>
         <Stats
           weatherStats={weatherStats}
-          isLoading={isLoading} />
+          isLoading={isLoading}
+          layoutName="main-stats"
+        />
       </div>
-      <Days />
+      <Days weather={weather} weatherStats={weatherStats} />
     </div >
+    <CurrentWeatherCondition></CurrentWeatherCondition>
+  </>
   )
 }

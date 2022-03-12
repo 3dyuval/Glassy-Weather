@@ -7,9 +7,10 @@ export default function CityData(WrappedComponent, name) {
   return props => {
 
     const { fakeAPI, getWeather } = useWeather()
-
     const [weather, setWeather] = useState([])
     const [isLoading, setLoading] = useState(false)
+
+    const useReal = false;
 
     function getData(cityName) {
       setLoading(true)
@@ -27,17 +28,19 @@ export default function CityData(WrappedComponent, name) {
 
     function handleWeatherUpdate() {
       setLoading(true)
-      fakeAPI(2500, name).then(data => {
-        setWeather((weather) => data)
-        setLoading(false)
-      })
+      if (!useReal) {
+        fakeAPI(1000, name).then(data => {
+          setWeather(data)
+          setLoading(false)
+        })
+      } else {
+        getData(name)
+      }
     }
 
 
     useEffect(() => {
-      // let isMounted = true
       handleWeatherUpdate()
-      // return () => { isMounted = false }
     }, [])
 
     return (

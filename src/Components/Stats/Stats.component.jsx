@@ -1,11 +1,9 @@
-import { useSpring, animated as a } from "react-spring"
 import "../../SCSS/Stats.scss";
 
-export default function Stats({ weatherStats }) {
+export default function Stats({ weatherStats, layoutName }) {
 
 
-  return <div className="stats">
-    {console.log(weatherStats)}
+  return <div className={layoutName} alt={layoutName}>
     {weatherStats.map(({ statName, statValue }) =>
       <Stat
         statName={statName}

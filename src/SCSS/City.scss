@@ -17,16 +17,13 @@
   display: block;
   position: relative;
   //col
-
-  opacity: 0.9;
   //txt
   //misc
   overflow: hidden;
   //padding: $pad1;
-  margin: $pad1;
+  // margin: $pad1;
   border-radius: 1em;
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
+
   z-index: 1;
   max-width: 80vw;
 }

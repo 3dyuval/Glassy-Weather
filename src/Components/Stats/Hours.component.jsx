@@ -1,17 +1,16 @@
 import React from "react"
 import Hour from "./Hour"
-import { animated as a, useTrail, useTransition, useSpring } from "react-spring"
-import useWeather from "../../Hooks/useWeather"
+import { animated as a, useTrail, useTransition } from "react-spring"
 import "../../SCSS/Hours.scss"
 
-export default function Hours({ hours, isLoading }) {
-  const { mockHours } = useWeather()
+export default function Hours(props) {
+  const { hours, isLoading } = props;
 
   function mapHours(data) {
     return data.map((hour, index) => <Hour isLoading={isLoading} hour={hour} key={`hour${index}`} />)
   }
 
-  if (isLoading) return <MockHours isLoading={isLoading}>{mapHours(mockHours())}</MockHours>
+  if (isLoading) return <MockHours isLoading={isLoading}>{mapHours(hours)}</MockHours>
   return <HoursAnimation isLoading={isLoading}>{mapHours(hours)}</HoursAnimation>
 }
 
