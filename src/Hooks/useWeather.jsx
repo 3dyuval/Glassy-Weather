@@ -6,7 +6,7 @@ import useStorage from "./useStorage"
 export default function useWeather() {
 
     function getWeather(input) {
-        const baseURL = `http://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_API_KEY}`
+        const baseURL = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_API_KEY}`
         const options = `&q=${input}&days=3&aqi=no&alerts=no`
         return fetch(baseURL + options)
             .then(response =>
