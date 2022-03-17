@@ -1,13 +1,14 @@
 import React from "react"
 import Carousel, { CarouselItem } from "./Carousel.wrapper"
-import City from "../City/CityMain.component"
-import CityData from "../City/CityData.wrapper"
+import City from "./CityMain.component"
+import CityData from "../Data/withWeather.wrapper"
 import Welcome from "./Welcome.component"
 
-export default function Main(props) {
+
+export default function Weather(props) {
   const { cityList, setCurrentCity, handleAddCity } = props
 
-  if (cityList === undefined || !cityList.length) return <Welcome cityList={cityList} handleAddCity={handleAddCity} />
+  // if (cityList === undefined || !cityList.length) return <Welcome cityList={cityList} handleAddCity={handleAddCity} />
 
   return (<>
     <Carousel cityList={cityList} setCurrentCity={setCurrentCity}>

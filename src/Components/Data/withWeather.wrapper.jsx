@@ -3,19 +3,19 @@ import useWeather from "../../Hooks/useWeather"
 
 //received a component and a city name
 
-export default function CityData(WrappedComponent, name) {
+export default function Weather(WrappedComponent, name) {
   return props => {
 
     const { fakeAPI, getWeather } = useWeather()
     const [weather, setWeather] = useState([])
     const [isLoading, setLoading] = useState(false)
 
-    const useReal = false;
+    const useReal = true;
 
     function getData(cityName) {
       setLoading(true)
       try {
-        getWeather("&q=" + cityName + "&days=3")
+        getWeather(cityName)
           .then(data => {
             setWeather(() => data)
             setLoading(false)

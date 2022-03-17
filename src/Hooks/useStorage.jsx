@@ -1,44 +1,56 @@
+import axios from "axios"
+
 const CITYLIST = "cityList"
 const CONFIG = "configuration"
 
 function useStorage() {
 
-  const addCity = cityName => {
-    const currentList = getStorage(CITYLIST)
-    if (!currentList.length) {
-      const newCity = { name: cityName, id: 0 }
-      localStorage.setItem(
-        CITYLIST,
-        JSON.stringify([
-          newCity,
-        ])
-      )
-      console.log([newCity])
-      return [newCity]
+  function isValidCityName(cityName) {
+    const cityNames = ["Tel Aviv", "Budapest", "Rome"]
+    if (cityNames.find((name) => name == cityName)) {
+      return true
     }
-    return localStorage.setItem(
-      CITYLIST,
-      JSON.stringify([
-        ...currentList,
-        { name: cityName, id: currentList.length + 1 },
-      ])
-    )
+    return false
   }
 
-  const getStorage = (storageName) => {
+
+  function addCity(cityName) {
+
+    const currentList = getStorage(CITYLIST)
+
+    return new Promise((resolve, reject) => {
+      // if (!isValidCityName(cityName)) return reject('not such city')
+
+      //create a new list
+      const newCity = { name: cityName, id: 0 }
+      if (!currentList.length) {
+        localStorage.setItem(CITYLIST, JSON.stringify([newCity]))
+        return resolve([newCity])
+      }
+
+      //add to a list
+      const newList = [...currentList, { name: cityName, id: currentList.length + 1 }]
+      localStorage.setItem(CITYLIST, JSON.stringify(newList)
+      )
+      return resolve(newList)
+    })
+  }
+
+
+  function getStorage(storageName) {
     const saved = localStorage.getItem(storageName)
     const initialValue = JSON.parse(saved)
     return initialValue || []
   }
 
-  const deleteCity = city => {
+  function deleteCity(city) {
     const filteredList = getStorage(CITYLIST).filter(item => item.id !== city.id)
     if (!filteredList) return
     localStorage.setItem(CITYLIST, JSON.stringify(filteredList))
     return filteredList
   }
 
-  const saveList = list => {
+  function saveList(list) {
     localStorage.setItem(CITYLIST, JSON.stringify(list))
   }
 

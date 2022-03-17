@@ -1,13 +1,13 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../SCSS/modal.scss'
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function Modal({ children }) {
 
     const [modalState, setModalState] = useState(false)
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     useEffect(() => {
         setModalState(true)
@@ -16,7 +16,7 @@ function Modal({ children }) {
 
     function handleCloseModal() {
         setModalState(false)
-        history.goBack()
+        navigate(-1)
     }
 
     if (!modalState) return null

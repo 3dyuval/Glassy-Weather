@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
 import useStorage from "../../Hooks/useStorage"
-import CityList from "../City/CityList.component"
-import CityData from "../City/CityData.wrapper"
-import AddCity from "./AddCity.component"
+import CityList from "./CityList.component"
+import CityData from "../Data/withWeather.wrapper"
+import Cities from "../Data/withCities.wrapper"
+import AddCityInput from "./AddCityInput.component"
 import '../../SCSS/ManageCities.scss'
 
-export default function ManageCities(props) {
+export default function Manage(props) {
   const { cityList, setCityList } = props
   const { saveList } = useStorage()
 
@@ -13,7 +14,7 @@ export default function ManageCities(props) {
     saveList(cityList)
   }, [cityList])
 
-
+  if (cityList === undefined || !cityList.length) return null
   return (
     <div className="manage">
       <h1>Manage Cities</h1>
@@ -24,7 +25,9 @@ export default function ManageCities(props) {
           return <CityItem key={city.id} city={city} setCityList={setCityList} />
         })}
       </div>
-      <AddCity setCityList={setCityList} />
+      <Cities setCityList={setCityList} >
+        <AddCityInput />
+      </Cities>
     </div>
   )
 }

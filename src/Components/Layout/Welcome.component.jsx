@@ -1,14 +1,16 @@
-import React from "react";
-import AddCity from "./AddCity.component";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import AddCity from "../Data/withCities.wrapper";
 import '../../SCSS/Welcome.scss'
-
 
 export default function Welcome(props) {
   const { cityList, setCityList, handleAddCity } = props;
 
   const suggestions = ["Tel Aviv", "Budapest", "Rome"]
-
-  // if (cityList === undefined || !cityList.length) return null
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (cityList.length) navigate('/')
+  }, [cityList])
 
   return (<div className="welcome">
     <h1>What is your city?</h1>

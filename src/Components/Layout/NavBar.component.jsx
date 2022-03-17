@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
-import { NavLink, Route, useLocation, Switch } from "react-router-dom";
-import Configuration from "./Configuration"
+import React from 'react'
+import { Link, Route, useLocation, Routes } from "react-router-dom";
+import Configuration from "./Configuration.component"
 import ArrowIcon from "../../Assets/Arrow.svg?component"
 import MenuIcon from "../../Assets/Menu.svg?component"
 import FilterIcon from "../../Assets/Filter.svg?component"
-import Modal from './Modal';
+import Modal from './Modal.layout';
 
 function NavBar(props) {
     const { darkTheme, handleThemeToggle } = props;
-
-
 
     const location = useLocation();
 
@@ -20,34 +18,36 @@ function NavBar(props) {
 
                 {(location.pathname !== '/weather') &&
                     <li className="button">
-                        <NavLink to="/weather">
+                        <Link to="/weather">
                             <ArrowIcon />
-                        </NavLink>
+                        </Link>
                     </li>
                 }
                 {(location.pathname === '/weather') &&
                     <li className="button">
-                        <NavLink to="./manage" >
+                        <Link to="./manage" >
                             <MenuIcon />
-                        </NavLink>
+                        </Link>
                     </li>
                 }
                 {(location.pathname === '/manage') &&
-                    <NavLink to='/manage/configuration' >
+                    <Link to='/manage/configuration' >
                         <li className="button">
                             <FilterIcon />
                         </li>
-                    </NavLink>
+                    </Link>
                 }
             </ul>
 
-            <Switch>
-                <Route path="/manage/configuration">
+            <Routes>
+                <Route path="/manage/configuration" element={
                     <Modal>
                         <Configuration handleThemeToggle={handleThemeToggle} darkTheme={darkTheme} />
                     </Modal>
+                }>
+
                 </Route>
-            </Switch>
+            </Routes>
         </>
     );
 }

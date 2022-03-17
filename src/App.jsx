@@ -1,14 +1,16 @@
-import React, { useState, useLayoutEffect, useEffect } from "react"
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
+import React, { useState, useLayoutEffect } from "react"
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
 
 import "./Index.scss"
 import useStorage from "./Hooks/useStorage"
 
-import ManageCities from "./Components/Layout/ManageCities.component"
+import Manage from "./Components/Layout/Manage.page"
 import Header from "./Components/Layout/Header.component"
-import NavBar from "./Components/Layout/NavBar"
+import NavBar from "./Components/Layout/NavBar.component"
 import Welcome from "./Components/Layout/Welcome.component"
-import Main from "./Components/Layout/Main.component"
+import Weather from "./Components/Layout/Weather.component"
+import Cities from "./Components/Data/withCities.wrapper"
+import { ToastContainer } from 'react-tiny-toast';
 
 export default function App() {
 
@@ -16,7 +18,6 @@ export default function App() {
   const [darkTheme, setDarkTheme] = useState(getUserConfig().config.darkMode)
   const [cityList, setCityList] = useState(getStorage("cityList"))
   const [currentCity, setCurrentCity] = useState()
-
 
   function handleAddCity(itm) {
     const cityListFromStorage = addCity(itm)
@@ -46,31 +47,35 @@ export default function App() {
   return (
     <Router>
       <div className="app">
+        <ToastContainer />
         <Header>
           <NavBar handleThemeToggle={handleThemeToggle} darkTheme={darkTheme} />
         </Header>
-        <Switch>
-          <Route path="/manage">
-            <ManageCities cityList={cityList} setCityList={setCityList} />
-          </Route>
-          <Route path='/welcome'>
-          <Welcome
-              cityList={cityList}
-             handleAddCity={handleAddCity}
-             setCityList={setCityList} />
-          </Route>
-          <Route>
-          { cityList == undefined || !cityList.length ? <Redirect to="/welcome" /> :
-            <Main
-              handleAddCity={handleAddCity}
+        <Routes>
+          <Route path="/manage" element={
+            <Manage
               cityList={cityList}
               setCityList={setCityList}
+            />}
+          />
+          <Route path='/welcome' element={
+            <Cities>
+              <Welcome
+                cityList={cityList}
+                handleAddCity={handleAddCity}
+                setCityList={setCityList} />
+            </Cities>
+          } />
+          <Route path='/weather' element={
+            <Weather
+              cityList={cityList}
               currentCity={currentCity}
               setCurrentCity={setCurrentCity}
             />}
-          </Route>
-        </Switch>
+            render={() => (cityList == undefined || !cityList.length) && <Redirect to="/welcome" />}
 
+          />
+        </Routes>
       </div>
     </Router>
   )
