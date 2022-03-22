@@ -1,84 +1,77 @@
-import axios from "axios"
+const defaultConfig = {
+  stats: [{ name: "Temp", id: "temp_c", enabled: true },
+  { name: "Feels like", id: "feelslike_c", enabled: true },
+  { name: "Precipitation", id: "precip_mm", enabled: true },
+  { name: "Humidity", id: "humidity", enabled: true },
+  { name: "Windspeed", id: "wind_kph", enabled: true }],
+  settings: {
+    darkTheme: false
+  },
+  cities: 
+  [ { name: "Tel Aviv", id: 0 } ]
+}
 
-const CITYLIST = "cityList"
-const CONFIG = "configuration"
+function useStorage(CONFIG = "user-configuration") {
 
-function useStorage() {
-
-  function isValidCityName(cityName) {
-    const cityNames = ["Tel Aviv", "Budapest", "Rome"]
-    if (cityNames.find((name) => name == cityName)) {
-      return true
-    }
-    return false
+  function save(obj) {
+    localStorage.setItem(CONFIG, JSON.stringify(obj))
   }
 
-
-  function addCity(cityName) {
-
-    const currentList = getStorage(CITYLIST)
-
-    return new Promise((resolve, reject) => {
-      // if (!isValidCityName(cityName)) return reject('not such city')
-
-      //create a new list
-      const newCity = { name: cityName, id: 0 }
-      if (!currentList.length) {
-        localStorage.setItem(CITYLIST, JSON.stringify([newCity]))
-        return resolve([newCity])
-      }
-
-      //add to a list
-      const newList = [...currentList, { name: cityName, id: currentList.length + 1 }]
-      localStorage.setItem(CITYLIST, JSON.stringify(newList)
-      )
-      return resolve(newList)
-    })
-  }
-
-
-  function getStorage(storageName) {
+  function load(storageName) {
     const saved = localStorage.getItem(storageName)
-    const initialValue = JSON.parse(saved)
-    return initialValue || []
+    const loadedFromStorage = JSON.parse(saved)
+    return loadedFromStorage || null
   }
 
-  function deleteCity(city) {
-    const filteredList = getStorage(CITYLIST).filter(item => item.id !== city.id)
-    if (!filteredList) return
-    localStorage.setItem(CITYLIST, JSON.stringify(filteredList))
-    return filteredList
-  }
+//only checks if currentCityList empty or not and creates a new list
+  function addCity(cityName) {
+    const currentList = getStorageConfig('cities') 
+    const newCity = { id: currentList.length, name: cityName  }
 
-  function saveList(list) {
-    localStorage.setItem(CITYLIST, JSON.stringify(list))
-  }
-
-  function setUserConfig(config) {
-    const newConfig = { ...getUserConfig(), config }
-    localStorage.setItem(CONFIG, JSON.stringify(newConfig))
-  }
-
-  function getUserConfig() {
-
-    const defaultConfig = {
-      stats: [{ name: "Temp", id: "temp_c", enabled: true },
-      { name: "Feels like", id: "feelslike_c", enabled: true },
-      { name: "Precipitation", id: "precip_mm", enabled: true },
-      { name: "Humidity", id: "humidity", enabled: true },
-      { name: "Windspeed", id: "wind_kph", enabled: true }],
-      config: {
-        darkMode: false
+      if (!currentList.length) {
+        return {cities: [newCity]}
       }
-    }
-    const saved = getStorage(CONFIG);
-    if (saved.length === 0) {
-      return defaultConfig;
-    }
-    return saved
+
+      return {cities: [ ...currentList, newCity]}
   }
 
-  return { addCity, getStorage, deleteCity, saveList, getUserConfig, setUserConfig }
+  // only removes the key and updates the ID's
+  function deleteCity(id) {
+    const currentList = getStorageConfig('cities')
+    if( currentList === null) return defaultConfig.cities
+
+    const filtered = currentList.filter((itm, idx) =>  (id !== idx))
+    const filteredAndOrdered = filtered.map((itm, idx) =>  ({name: itm.name, id: idx}))
+    save(filteredAndOrdered)
+    return filteredAndOrdered
+  }
+  
+  function getStorageConfig(key) {
+    const config = load(CONFIG);
+    if (!key) {
+       const userConfig =  config  ? config : defaultConfig
+       return userConfig
+      }
+
+    else if (key) {
+      const selectedConfigKey =  config  ? config[key] : defaultConfig[key]
+      return selectedConfigKey
+     }
+  }
+
+  function setStorageConfig(newConfig) {
+    const currentConfig = getStorageConfig()
+    if (!newConfig) {
+      save(currentConfig)
+      return currentConfig
+    }
+    const newAndUpdated = {...currentConfig,  ...newConfig }
+    save( newAndUpdated )
+    return newAndUpdated
+  }
+
+
+  return { load, addCity, deleteCity, getStorageConfig, setStorageConfig }
 }
 
 

@@ -1,55 +1,57 @@
+import axios from "axios";
 import { compareAsc, format } from "date-fns"
-import citiesData from "./fakeData"
+import { useState, useEffect } from "react";
+import { toast } from "react-tiny-toast";
 import useStorage from "./useStorage"
+import codes from "../Assets/WeatherConditions/"
 
 
-export default function useWeather() {
+function useWeather(city = null) {
 
-    function getWeather(input) {
-        const baseURL = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_API_KEY}`
-        const options = `&q=${input}&days=3&aqi=no&alerts=no`
-        return fetch(baseURL + options)
-            .then(response =>
-                response.json()
-            )
-    }
+    const { getStorageConfig } = useStorage();
+    const [weather, setWeather] = useState(null)
+    const [isLoading, setLoading] = useState(false)
+    const [stats, setStats] = useState([])
+    const [graphic, setGraphic] = useState(null)
 
-    function fakeAPI(ms, cityName) {
-        const { telAviv, budapest, rome } = citiesData()
-        return new Promise(resolve => {
-            setTimeout(() => {
-                switch (cityName) {
-                    case "Tel Aviv":
-                        return resolve(telAviv)
-                    case "Budapest":
-                        return resolve(budapest)
-                    case "Rome":
-                        return resolve(rome)
-                }
-            }, ms)
-        })
-    }
 
-    function useMockHours() {
-        function roundMinutes(date) {
-            date.setHours(date.getHours() + Math.round(date.getMinutes() / 60));
-            date.setMinutes(0, 0, 0); // Resets also seconds and milliseconds
-            return date;
+    function fetchWeather(city) {
+        setLoading(true)
+        try {
+            axios.get(`/${city}`)
+                .then(response => {
+                    toast.show(`${response.data.location.name} weather fetched`, { timeout: 3000 })
+                    setWeather(response.data)
+                    // console.log(response.data)
+                    setStats(getStats(response.data))
+                    const svg = codes.find(itm => itm.code == response.data.current.condition.code)
+                    setGraphic((previous) => `/src/Assets/WeatherConditions/${svg.icon}.svg`)
+                })
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false)
         }
-
-        const mock = [...Array(12)].map((item, index) => {   // empty [obj] for empty boxes
-            const o = { time: new Date(), condition: { icon: null }, temp_c: 0 }
-            o.time.setHours(o.time.getHours() + index)
-            o.time = roundMinutes(o.time)
-            return o
-        })
-        return mock
-
     }
 
-    function useHours(data) {
+    useEffect(() => {
+        if (!city) return
+        fetchWeather(city)
+    }, [])
 
-        const hours = [...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]
+
+    function getStats(weather) {
+        const stats = {
+            hours: getHoursFromWeather(weather),
+            conditions: userSettingsFilteredStats(weather),
+            days: sortDays(weather),
+        }
+        return stats
+    }
+
+    function getHoursFromWeather(weather) {
+
+        const hours = [...weather.forecast.forecastday[0].hour, ...weather.forecast.forecastday[1].hour]
         const fromCurrent = []
         for (let i = 0; i < hours.length; i++) {
             if (compareAsc(new Date(hours[i].time), new Date()) == 1) {
@@ -59,43 +61,59 @@ export default function useWeather() {
         return fromCurrent.slice(0, 13)
     }
 
-    const { getUserConfig } = useStorage();
+    function userSettingsFilteredStats(weather) {
 
-    function getStatsValues(data) {
-
-        const userConfig = getUserConfig()
-
+        const userConfig = getStorageConfig('stats')
         let list = []
-        userConfig.stats.forEach(stat => {
-            const statValue = data[stat.id]
+        userConfig.forEach(stat => {
+            const statValue = weather.current[stat.id]
+            if (!statValue) return
             list.push({
                 statName: stat.id,
-                statValue: !statValue ? '--' : statValue,
+                statValue: statValue ? statValue : '--'
             })
         })
         return list
     }
 
+    function userSettingsFilteredDaysStats(stats) {
 
-    function sortDays(data) {
+        let list = []
+        for (const property in stats) {
+            if (typeof stats[property] === 'number') {
+                list.push({
+                    statName: property,
+                    statValue: stats[property]
+                })
+            }
+
+        }
+        return list
+    }
+
+    function sortDays(weather) {
 
         const formatDay = (date) => format(new Date(date), "EEEE")
         const formatDate = (date) => format(new Date(date), "dd/mm/yy")
 
-        return data.forecast.forecastday.map(day => {
+        return weather.forecast.forecastday.map(day => {
             return {
                 date: formatDate(day.date),
                 name: formatDay(day.date),
                 stats: {
                     temp: day.day.avgtemp_c,
                     condition: day.day.condition.icon,
+                    stats: userSettingsFilteredDaysStats(day.day)
                 }
 
             }
         })
     }
 
-    return { getWeather, fakeAPI, useHours, getStatsValues, useMockHours, sortDays }
+
+
+    return { weather, stats, isLoading, fetchWeather, graphic }
 }
 
 
+export default useWeather

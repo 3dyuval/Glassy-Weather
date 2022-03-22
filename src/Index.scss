@@ -72,11 +72,9 @@ a:active {
   color: $active-color;
 }
 
-.CurrentWeatherCondition {
-  transform: scale(2);
+.background-graphic {
+  transform: scale(3);
   position: absolute;
-  z-index: -10;
-  bottom: 2vh;
-  right: 12.5vw;
+  z-index: -100;
   overflow: hidden;
 }

@@ -7,7 +7,7 @@ import FilterIcon from "../../Assets/Filter.svg?component"
 import Modal from './Modal.layout';
 
 function NavBar(props) {
-    const { darkTheme, handleThemeToggle } = props;
+    const { handleUserConfig } = props;
 
     const location = useLocation();
 
@@ -18,12 +18,12 @@ function NavBar(props) {
 
                 {(location.pathname !== '/weather') &&
                     <li className="button">
-                        <Link to="/weather">
+                        <Link to="/">
                             <ArrowIcon />
                         </Link>
                     </li>
                 }
-                {(location.pathname === '/weather') &&
+                {(location.pathname === '/') &&
                     <li className="button">
                         <Link to="./manage" >
                             <MenuIcon />
@@ -42,7 +42,7 @@ function NavBar(props) {
             <Routes>
                 <Route path="/manage/configuration" element={
                     <Modal>
-                        <Configuration handleThemeToggle={handleThemeToggle} darkTheme={darkTheme} />
+                        <Configuration handleUserConfig={handleUserConfig} />
                     </Modal>
                 }>
 

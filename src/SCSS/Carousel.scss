@@ -3,6 +3,7 @@
   overflow-x: hidden;
   width: 95vw;
   border-radius: 1em;
+  z-index: 100;
 }
 
 .inner {
@@ -17,6 +18,7 @@
 .indicators {
   display: flex;
   justify-content: center;
+  z-index: 100;
 
   button {
     margin: 8px;

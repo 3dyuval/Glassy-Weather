@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
 import useStorage from "../../Hooks/useStorage"
-import CityList from "./CityList.component"
-import CityData from "../Data/withWeather.wrapper"
 import Cities from "../Data/withCities.wrapper"
 import AddCityInput from "./AddCityInput.component"
 import '../../SCSS/ManageCities.scss'
@@ -29,5 +27,28 @@ export default function Manage(props) {
         <AddCityInput />
       </Cities>
     </div>
+  )
+}
+
+
+function CityList(props) {
+  const { city, setCityList, isLoading } = props
+  const { deleteCity } = useStorage()
+
+  return (
+    <li className="city-item" key={city.id}>
+      <span className="city-name">{city.name}</span>
+      {isLoading && "loading..."}
+
+      <input
+        type="button"
+        value="X"
+        className="delete-city"
+        onClick={() => {
+          setCityList(deleteCity(city))
+        }}
+      ></input>
+    </li>
+
   )
 }

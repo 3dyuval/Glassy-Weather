@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import { useSpring, animated as a } from "react-spring";
 import "../../SCSS/Carousel.scss";
+import BackgroundAnimation from "./BackgroundAnimation"
 
 export function CarouselItem({ children, width }) {
   return (
@@ -12,7 +13,7 @@ export function CarouselItem({ children, width }) {
   );
 }
 
-function Carousel({ children, cityList, setCurrentCity }) {
+function Carousel({ children, cityList, setCurrentCity, currentCity, graphic, isLoading }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ function Carousel({ children, cityList, setCurrentCity }) {
           style={contentProps}
         >
           {React.Children.map(children, (child, index) => {
-            return React.cloneElement(child, { width: "100%" });
+            return React.cloneElement(child, { width: "100%", currentCity: currentCity });
           })}
         </a.div>
       </div>
@@ -76,6 +77,7 @@ function Carousel({ children, cityList, setCurrentCity }) {
           Next
         </button>
       </div>
+      <BackgroundAnimation graphic={graphic} isLoading={isLoading} ></BackgroundAnimation>
     </>
   );
 }

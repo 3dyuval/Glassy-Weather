@@ -1,31 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import useStorage from '../../Hooks/useStorage'
-import useWeather from '../../Hooks/useWeather'
 import '../../SCSS/Days.scss'
-import Stats from './Stats.component'
-
-function Days({ weather }) {
-
-    const [selectedDay, useSelectedState] = useState('')
-    const [days, setDays] = useState()
-
-    const { sortDays, getStatsValues } = useWeather();
+import Conditions from './Conditions.component'
 
 
-    useEffect(() => {
-        if (weather.length === 0) return
-        setDays(days => sortDays(weather))
-    }, [weather])
+function Days({ days }) {
 
+    const [selectedDay, setSelectedDay] = useState('')
 
     return (
         <div className="days">
             {days && days.map(day => <Day
                 key={day.date}
                 day={day}
-                selected={selectedDay}
-                useSelectedState={useSelectedState}
-                weatherStats={getStatsValues(day)}
+                selectedDay={selectedDay}
+                setSelectedDay={setSelectedDay}
             />)}
         </div>
     )
@@ -33,17 +21,17 @@ function Days({ weather }) {
 
 export default Days
 
-function Day(props) {
-    const { date, name, stats } = props.day;
-    const { weatherStats, useSelectedState } = props;
+function Day({ setSelectedDay, selectedDay, day }) {
+
+    const { date, name, stats } = day;
 
     function handleSelectDay() {
-        useSelectedState(props.day)
+        setSelectedDay((selectedDay !== day) ? day : '')
     }
 
     return (
         <div onClick={handleSelectDay}
-            className={props.day === props.selected ? 'selectedDay day' : 'day'}>
+            className={selectedDay === day ? 'selectedDay day' : 'day'}>
             <div className="top">
                 <div className="left">
                     <div>{name}</div>
@@ -56,7 +44,7 @@ function Day(props) {
             </div>
 
             <div className="stats-modal">
-                <Stats weatherStats={weatherStats} layoutName="daily-stats" />
+                <Conditions layoutName="daily-stats" conditions={stats.stats} />
             </div>
         </div>
     )

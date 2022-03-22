@@ -1,28 +1,43 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Hour from "./Hour"
 import { animated as a, useTrail, useTransition } from "react-spring"
 import "../../SCSS/Hours.scss"
 
-export default function Hours(props) {
-  const { hours, isLoading } = props;
+export default function Hours({ isLoading, hours }) {
 
-  function mapHours(data) {
-    return data.map((hour, index) => <Hour isLoading={isLoading} hour={hour} key={`hour${index}`} />)
+  const mock = Array.from({ length: 12 }, ((item, idx) => {
+    // empty [obj] for empty boxes
+    return {
+      time: roundMinutes(new Date()) + idx,
+      condition: { icon: null },
+      temp_c: 0
+    }
+  })
+  )
+
+  function roundMinutes(dateObject) {
+    return dateObject.getHours() + Math.round(dateObject.getMinutes() / 60)
   }
 
-  if (isLoading) return <MockHours isLoading={isLoading}>{mapHours(hours)}</MockHours>
-  return <HoursAnimation isLoading={isLoading}>{mapHours(hours)}</HoursAnimation>
+  function mapData(arr) {
+    return arr.map((hour, index) => <Hour isLoading={isLoading} hour={hour} key={`hour${index}`} />)
+  }
+
+  if (isLoading || !hours) return <MockHours isLoading={isLoading}>{mapData(mock)}</MockHours>
+  return <MockHours isLoading={isLoading}>{mapData(hours)}</MockHours>
 }
 
 function HoursAnimation({ children, isLoading }) {
   const hours = React.Children.toArray(children)
 
-  const transition = useTransition(hours, {
+  const [transition, api] = useTransition(hours, () => ({
     from: { opacity: 0.25 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
     trail: 25
-  })
+  }))
+
+
 
   return (<div className="hours">
 
@@ -45,9 +60,12 @@ function MockHours({ children, isLoading }) {
     })
   )
 
-  if (!isLoading) {
-    api.start({ opacity: 1 })
-  }
+  useEffect(() => {
+    if (!isLoading) {
+      api.start({ opacity: 1 })
+    }
+  }, [isLoading])
+
 
   return (
     <a.div className="hours">
