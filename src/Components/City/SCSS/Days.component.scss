@@ -1,0 +1,50 @@
+.days {
+	width: auto;
+	background-color: $active-color;
+	padding: $pad1;
+	margin: $pad1;
+	border-radius: $rad2;
+	max-height: 200px;
+
+	overflow-y: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.day {
+	margin: $pad1;
+	padding: $pad1;
+	border-radius: $rad1;
+	background-color: rgba($light-day-bg, 0.9);
+
+	.top {
+		display: flex;
+		justify-content: space-between;
+		width: auto;
+		.right {
+			display: flex;
+		}
+	}
+
+	.temp {
+		font-size: $font4;
+	}
+	.stats-modal {
+		opacity: 0;
+		display: hidden;
+		max-height: 0;
+		transition: all 0.25s ease-out;
+	}
+	&.selectedDay {
+		background-color: $light-day-bg;
+
+		.stats-modal {
+			opacity: 1;
+			display: show;
+			max-height: 500px;
+		}
+	}
+}

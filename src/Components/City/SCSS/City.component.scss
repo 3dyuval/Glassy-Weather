@@ -1,0 +1,19 @@
+.city-frame {
+	position: relative;
+	overflow: hidden;
+
+	.title {
+		margin: $pad1;
+	}
+}
+
+.city {
+	//pos
+	display: block;
+	position: relative;
+	overflow: hidden;
+	border-radius: 1em;
+	z-index: 1;
+	max-width: 80vw;
+	background-color: rgba($active-color, 0.2);
+}
