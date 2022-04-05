@@ -4,15 +4,6 @@ import * as Utils from "../Utils"
 import { notifyUser } from "../Utils";
 
 
-const api = () => {
-    if (process.env.NODE_ENV === 'production') {
-        return process.env.SERVER_URL
-    }
-    return process.env.LOCAL_SERVER_URL
-}
-
-
-
 export function useGetWeather(city = null) {
 
     const [weather, setWeather] = useState(null)
@@ -21,7 +12,7 @@ export function useGetWeather(city = null) {
     function getWeather(city, notification = null) {
         setLoading(true)
         try {
-            axios.get(api() + city)
+            axios.get('/city/' + city)
                 .then(response => {
                     notifyUser(notification ? notification : `${response.data.location.name} weather fetched`)
                     setWeather({
