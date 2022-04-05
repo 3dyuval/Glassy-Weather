@@ -1,4 +1,4 @@
-const PORT = 8000
+const port = process.env.PORT
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
@@ -8,9 +8,16 @@ const app = express()
 
 app.use(cors())
 
-app.listen(PORT, () => {
-    console.log(`server is listening at port: ${PORT}`)
+app.listen(port, () => {
+    console.log(`server is listening at port: ${port || 8000}`)
 })
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('build'))
+    app.get('*', (req, res) => {
+        req.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+    })
+}
 
 app.get('/city/:city', (req, res) => {
     const options = {
