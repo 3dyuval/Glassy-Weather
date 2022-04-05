@@ -1,71 +1,116 @@
-import React, { useState, useLayoutEffect, useEffect } from "react"
+import React, { useState, useReducer, useEffect, useLayoutEffect } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-
 import "./Index.scss"
-import Header from "./Components/Header/Header.component"
-import NavBar from "./Components/NavBar/NavBar.component"
+import * as defaultData from './Data'
 import { useLocalStorage, useGetWeather } from "./Hooks/"
 import { ToastContainer } from 'react-tiny-toast';
-import * as defaultData from './Data'
+// components //
+import Header from "./Components/Header/Header.component"
+import NavBar from "./Components/Header/NavBar.component"
 import Main from "./Components/Main/Main.page"
 import Manage from "./Components/Manage/Manage.component"
 import Modal from "./Components/Modal/Modal.wrapper"
 import Configuration from "./Components/Manage/Configuration.component"
+import { notifyUser } from "./Utils"
+
+/*
+* Weather App  
+* Yuval Dikerman
+* yuval.glide.page
+*/
+
+const citiesActions = {
+  ADD_CITY: "ADD_CITY",
+  DELETE_CITY: "DELETE_CITY",
+}
+
+function citiesReducer(state, action) {
+  switch (action.type) {
+    case citiesActions.ADD_CITY: {
+      //(validation of city name is done within the component)
+      return [...state, {
+        id: state.length,
+        name: action.payload
+      }]
+    } case citiesActions.DELETE_CITY: {
+      const newState = state.filter(city => city.id !== action.payload)
+      return newState
+    }
+  }
+}
+
+function configReducer(state, action) {
+  switch (action.type) {
+    case 'add-stat': {
+      const updatedStats = { stats: [...state.stats, { statName: action.payload }] }
+      return { ...state.settings, ...updatedStats }
+    }
+    case 'remove-stat': {
+      return { stats: state.stats.filter(itm => itm.statName != action.payload) }
+    }
+    case 'toggle': {
+      console.log(action.payload)
+      if (!action.payload.checked) {
+        notifyUser(action.payload.statName + ' removed')
+        return { ...state, stats: state.stats.filter(itm => itm.statName !== action.payload.statName) }
+      } else if (action.payload.checked) {
+        notifyUser(action.payload.statName + ' added')
+        return { ...state, stats: [...state.stats, { statName: action.payload.statName }] }
+      }
+    }
+    default: {
+      return state
+    }
+  }
+}
 
 export default function App() {
+  const { weather, getWeather, isLoading } = useGetWeather(); // my custom hook 
 
-  const { weather, getWeather, isLoading } = useGetWeather();
-  const [cities, setCities] = useLocalStorage('cities', defaultData.DEFAULT_CITIES)
-  const [config, setConfig] = useLocalStorage('stats', defaultData.DEFAULT_CONFIG)
-  const [selectedCity, setSelectedCity] = useState(cities[0])
-  const [darkMode, setDarkMode] = useState(config?.settings.darkMode ?? false)
+  const [cities, dispatchCities] = useReducer(citiesReducer, [], () => {
+    const storage = JSON.parse(localStorage.getItem("cities"))
+    return storage || defaultData.DEFAULT_CITIES
+  })
+
+  const [selectedCity, setSelectedCity] = useState(() => cities[0] || defaultData.DEFAULT_CITIES[0])
+
+  const [config, dispatchConfig] = useReducer(configReducer, [], () => {
+    const storage = JSON.parse(localStorage.getItem("config"))
+    return storage || defaultData.DEFAULT_CONFIG
+  })
+
+  const [darkMode, setDarkMode] = useState(config?.settings?.darkMode ?? false)
+
 
   useLayoutEffect(() => {
-    getWeather(selectedCity.name)
     document.title = `Weather in ${selectedCity}`
+    getWeather(selectedCity)
   }, [selectedCity])
 
-
-  // //accepts {config: configValue}
-  // function handleUserConfig(newConfig) {
-  //   const updated = setStorageConfig(newConfig)
-  //   setConfig((previous) => updated)
-  // }
-
-  // useLayoutEffect(() => {
-  //   if (!config) return
-  //   if (config.settings.darkMode === 'false') {
-  //     document.body.className = "light";
-  //   } else if (config.settings.darkMode === 'true') {
-  //     document.body.className = "dark";
-  //   }
-  //   // setCities(config.cities)
-  // }, [config]);
-
+  useEffect(() => {
+    if (!cities) return
+    localStorage.setItem("cities", JSON.stringify(cities))
+    localStorage.setItem("config", JSON.stringify(config))
+  }, [cities, config])
 
   return (
     <Router>
+      {/* <div className="cloud" ref={cloudRef}></div> */}
       <div className="app">
         <ToastContainer />
         <Header>
-          <NavBar config={config} darkMode={darkMode} setDarkMode={setDarkMode} />
-          {/* <AddCityInput handleUserConfig={handleUserConfig} /> */}
+          <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
         </Header>
         <Routes>
           <Route path='*' element={<Main weather={weather} cities={cities} setSelectedCity={setSelectedCity} />} />
-          <Route path="/manage/" element={<Manage
-            config={config}
-            setConfig={setConfig}
-            cities={cities}
-            setCities={setCities}
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
+          <Route path="/manage/" element={<Manage citiesActions={citiesActions} cities={cities} dispatch={dispatchCities}
           />}>
-            <Route path="/manage/configuration" element={<Modal ><Configuration config={config} setConfig={setConfig} darkMode={darkMode} setDarkMode={setDarkMode} /></Modal>} />
+            <Route path="/manage/configuration" element={<Modal ><Configuration config={config} dispatch={dispatchConfig} darkMode={darkMode} setDarkMode={setDarkMode} /></Modal>} />
           </Route>
         </Routes>
       </div>
     </Router>
+
   )
 }
 

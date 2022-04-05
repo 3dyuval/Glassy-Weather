@@ -8,12 +8,7 @@ function City({ weather, isLoading }) {
 
   return (
     <div className="city">
-      <div style={{ margin: '2em' }} >
-        {/* <input
-          type="button"
-          value={isLoading ? "loading..." : `Get Weather in ${cityName}`}
-          disabled={isLoading}
-        /> */}
+      <div className="left-view">
         <div className="title metadata">
           <h1>{weather?.metadata.name ?? 'Current City'}</h1>
           <h2>{weather?.metadata.localtime ?? 'Time in Current City'}</h2>

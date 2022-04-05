@@ -1,30 +1,25 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
-import { toast } from "react-tiny-toast"
+import { notifyUser } from "../../Utils"
 
-function AddCityInput(props) {
-
-    const { cities, setCities } = props;
+function AddCityInput({ dispatch, citiesActions }) {
 
     const [input, setInput] = useState("")
+
 
     function handleButtonClick(event) {
         event.preventDefault()
         if (!input) return
 
         try {
-            axios.get(`http://localhost:8000/${input}`)
+            axios.get(`http://localhost:8000/city/${input}`)
                 .then(response => {
-                    setCities([...cities, {
-                        id: cities.length,
-                        name: response.data.location.name
-                    }]
-                    )
-                    toast.show(`${response.data.location.name} added`, { timeout: 3000 })
+                    dispatch({ type: citiesActions.ADD_CITY, payload: response.data.location.name, })
+                    notifyUser(`${response.data.location.name} added`)
                 })
         }
         catch (err) {
-            toast.show(`${err}`, { timeout: 2000 })
+            notifyUser(`${err}`)
             console.error(err)
         }
         finally {

@@ -1,32 +1,39 @@
 {
-  "name": "glassy-weather",
-  "private": true,
-  "version": "1.0.4",
-  "scripts": {
-    "dev": "vite",
-    "server": "nodemon api/",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "axios": "^0.26.1",
-    "cors": "^2.8.5",
-    "date-fns": "^2.27.0",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "nodemon": "^2.0.15",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-hooks-compose": "^2.0.16",
-    "react-router-dom": "^6.0.0",
-    "react-spring": "^9.4.3",
-    "react-swipeable": "^6.2.0",
-    "react-tiny-toast": "^1.0.2"
-  },
-  "devDependencies": {
-    "@honkhonk/vite-plugin-svgr": "^1.1.0",
-    "@vitejs/plugin-react": "^1.0.7",
-    "sass": "^1.49.9",
-    "vite": "^2.8.0"
-  }
+	"name": "glassy-weather",
+	"private": true,
+	"version": "1.0.5",
+	"scripts": {
+		"dev": "vite",
+		"server": "nodemon api/",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"axios": "^0.26.1",
+		"cors": "^2.8.5",
+		"date-fns": "^2.27.0",
+		"dotenv": "^16.0.0",
+		"express": "^4.17.3",
+		"nodemon": "^2.0.15",
+		"p5": "^1.4.1",
+		"postcss-import": "^14.1.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-hooks-compose": "^2.0.16",
+		"react-router-dom": "^6.0.0",
+		"react-spring": "^9.4.3",
+		"react-swipeable": "^6.2.0",
+		"react-tiny-toast": "^1.0.2",
+		"three": "0.121.0",
+		"vanta": "^0.5.21"
+	},
+	"devDependencies": {
+		"@honkhonk/vite-plugin-svgr": "^1.1.0",
+		"@vitejs/plugin-react": "^1.0.7",
+		"autoprefixer": "^10.4.4",
+		"postcss": "^8.4.12",
+		"sass": "^1.49.9",
+		"tailwindcss": "^3.0.23",
+		"vite": "^2.8.0"
+	}
 }

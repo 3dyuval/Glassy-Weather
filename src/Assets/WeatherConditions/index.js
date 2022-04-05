@@ -87,7 +87,7 @@ const codes = [
         "code": 1150,
         "day": "Patchy light drizzle",
         "night": "Patchy light drizzle",
-        "icon": "1063, 1069, 1072, 1153, 1168, 1150"
+        "icon": "1063, 1069, 1072, 1153, 1168"
     },
     {
         "code": 1153,
@@ -117,7 +117,7 @@ const codes = [
         "code": 1183,
         "day": "Light rain",
         "night": "Light rain",
-        "icon": 296
+        "icon": "1063, 1069, 1072, 1153, 1168"
     },
     {
         "code": 1186,
@@ -129,7 +129,7 @@ const codes = [
         "code": 1189,
         "day": "Moderate rain",
         "night": "Moderate rain",
-        "icon": 302
+        "icon": "1171, 1180, 1186, 1192"
     },
     {
         "code": 1192,

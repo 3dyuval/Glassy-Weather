@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { animated as a, useTrail, useTransition } from "react-spring"
 
-function LoadedAnimation({ children, animate }) {
+function LoadedAnimation({ children, isLoading }) {
 
     const [transition, api] =
         useTransition(React.Children.toArray(children),
@@ -9,7 +9,10 @@ function LoadedAnimation({ children, animate }) {
                 from: { opacity: 0.25 },
                 enter: { opacity: 1 },
                 leave: { opacity: 0 },
-                trail: 25
+                trail: 25,
+                reset: true,
+                onRest: () => { api.start({ opacity: 1 }) }
+
             }))
 
     return (<div className="hours">
@@ -26,20 +29,14 @@ function LoadingAnimation({ children, isLoading }) {
     const hours = React.Children.toArray(children)
     const [trail, api] = useTrail(hours.length,
         () => ({
-            from: { opacity: 1 },
+            from: { opacity: 0.75 },
             to: { opacity: 0.25 },
             loop: true,
-            delay: 1500,
+            delay: 100,
             easing: 'easings.easeInOutQuart',
+            // onRest: () => { api.start({ opacity: 1 }) }
         })
     )
-
-    useEffect(() => {
-        if (!isLoading) {
-            api.start({ opacity: 1 })
-        }
-    }, [isLoading])
-
 
     return (
         <a.div className="hours">

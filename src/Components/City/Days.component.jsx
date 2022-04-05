@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Stats from './Stats.component'
 
 
@@ -24,12 +24,8 @@ function Day({ setSelectedDay, selectedDay, day }) {
 
     const { date, name, stats, temp, condition } = day;
 
-    function handleSelectDay() {
-        setSelectedDay((selectedDay !== day) ? day : '')
-    }
-
     return (
-        <div onClick={handleSelectDay}
+        <div onClick={(previousDay) => setSelectedDay((selectedDay !== day) ? day : '')}
             className={selectedDay === day ? 'selectedDay day' : 'day'}>
             <div className="top">
                 <div className="left">

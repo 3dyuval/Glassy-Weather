@@ -1,28 +1,29 @@
 const DEFAULT_SETTINGS =
-    [
-        {
-            darkMode: false
-        }
-    ]
+
+{
+    darkMode: false
+}
+
 
 const DEFAULT_WEATHER_STATS =
     [
         {
-            name: "Temp", id: "temp_c"
+            title: "Temp", statName: "temp_c"
         },
         {
-            name: "Feels like", id: "feelslike_c"
+            title: "Feels like", statName: "feelslike_c"
         },
         {
-            name: "Precipitation", id: "precip_mm"
+            title: "Precipitation", statName: "precip_mm"
         },
         {
-            name: "Humidity", id: "humidity"
+            title: "Humidity", statName: "humidity"
         },
         {
-            name: "Windspeed", id: "wind_kph"
+            title: "Windspeed", statName: "wind_kph"
         }
     ]
+
 
 
 export const DEFAULT_CONFIG = { settings: DEFAULT_SETTINGS, stats: DEFAULT_WEATHER_STATS }

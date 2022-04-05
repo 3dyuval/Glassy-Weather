@@ -1,7 +1,7 @@
 import { compareAsc } from "date-fns/esm"
 
 const NOW_INDEX = 0;
-const NEXT_12_HOURS_INDEX = 13;
+const NEXT_12_HOURS = 13;
 
 export function getHours(weather) {
 
@@ -13,5 +13,5 @@ export function getHours(weather) {
             fromCurrent.push(hours[i])
         }
     }
-    return fromCurrent.slice(NOW_INDEX, NEXT_12_HOURS_INDEX)
+    return fromCurrent.slice(NOW_INDEX, NEXT_12_HOURS)
 }

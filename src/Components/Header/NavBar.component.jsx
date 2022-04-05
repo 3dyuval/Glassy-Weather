@@ -8,7 +8,6 @@ import Modal from '../Modal/Modal.wrapper';
 import Configuration from '../Manage/Configuration.component';
 
 function NavBar(props) {
-    const { handleUserConfig, config, darkMode, setDarkMode } = props;
 
     const location = useLocation();
 
@@ -16,7 +15,7 @@ function NavBar(props) {
         <>
 
             <ul className="navbar">
-                {(location.pathname !== '/weather') &&
+                {(location.pathname !== '/') &&
                     <li className="button">
                         <Link to="/">
                             <ArrowIcon />

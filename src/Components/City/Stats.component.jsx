@@ -1,5 +1,6 @@
+import { memo } from 'react'
 
-export default function Stats({ stats, layoutName }) {
+function Stats({ stats, layoutName }) {
 
 
   return <div className={layoutName} alt={layoutName}>
@@ -24,3 +25,5 @@ export default function Stats({ stats, layoutName }) {
     )}
   </div>
 }
+
+export default memo(Stats)

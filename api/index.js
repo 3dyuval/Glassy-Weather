@@ -12,7 +12,7 @@ app.listen(PORT, () => {
     console.log(`server is listening at port: ${PORT}`)
 })
 
-app.get('/:city', (req, res) => {
+app.get('/city/:city', (req, res) => {
 
     const options = {
         method: "GET",

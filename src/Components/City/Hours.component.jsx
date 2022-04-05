@@ -8,7 +8,7 @@ function Hours(props) {
   const { animate, hours } = props
 
   function mapHours(arr) {
-    return arr.map((hour, index) => <Hour animate={animate} hour={hour} key={`hour${index}`} />)
+    return arr.map((hour, index) => <Hour animate={animate} index={index} hour={hour} key={`hour${index}`} />)
   }
 
   if (animate || !hours) return <LoadingAnimation animate={animate}>{mapHours(dummyHours)}</LoadingAnimation>

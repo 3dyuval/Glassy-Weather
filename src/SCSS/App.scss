@@ -1,0 +1,78 @@
+body {
+	//default
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background: $light-day-bg;
+	color: $light-scheme-col;
+	.light2 {
+		background-color: #d5dcec;
+	}
+	// .city {
+	// 	backdrop-filter: blur(12px);
+	// 	-webkit-backdrop-filter: blur(12px);
+	// 	background: $light-day-frame;
+	// 	box-shadow: 0px -4px 12px rgba(255, 255, 255, 0.8),
+	// 		0px 10px 16px rgba(255, 255, 255, 0.8);
+	// 	margin-bottom: 1em;
+	// }
+}
+
+body.dark {
+	color: $dark-scheme-col;
+	background: $dark-day-bg;
+	.city {
+		backdrop-filter: blur(24px);
+		-webkit-backdrop-filter: blur(24px);
+		background-color: $light-day-frame;
+		box-shadow: 0px -4.16px 8.32px rgba(86, 98, 124, 0.1),
+			0px 9.36px 14.56px rgba(53, 60, 73, 0.5);
+	}
+	&.night {
+		background: $dark-night-bg;
+	}
+}
+
+html {
+	font-size: 18px;
+	font-family: Roboto;
+}
+
+.app {
+	height: 100vh;
+	display: flex;
+	position: relative;
+	justify-content: center;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+}
+
+a:link {
+	color: $active-color;
+	text-decoration: none;
+}
+
+a:visited {
+	color: $netural-color;
+}
+
+a:hover {
+	color: $netural-color;
+}
+
+a:active {
+	color: $active-color;
+}
+
+.cloud {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+}
+
+.toast-item {
+	z-index: 1000 !important;
+}

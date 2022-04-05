@@ -7,6 +7,7 @@ function Main(props) {
 
     const { weather, isLoading, cities, setSelectedCity } = props
 
+    if (!cities) return null
     return (<>
         <Carousel
             cities={cities}
