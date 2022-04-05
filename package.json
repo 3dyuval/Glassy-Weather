@@ -7,7 +7,6 @@
 		"start": "node server.js",
 		"server": "nodemon server.js",
 		"client": "npm start",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",
 		"build": "vite build",
 		"preview": "vite preview"
 	},
@@ -18,17 +17,13 @@
 		"dotenv": "^16.0.0",
 		"express": "^4.17.3",
 		"nodemon": "^2.0.15",
-		"p5": "^1.4.1",
 		"postcss-import": "^14.1.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"react-hooks-compose": "^2.0.16",
 		"react-router-dom": "^6.0.0",
 		"react-spring": "^9.4.3",
 		"react-swipeable": "^6.2.0",
-		"react-tiny-toast": "^1.0.2",
-		"three": "0.121.0",
-		"vanta": "^0.5.21"
+		"react-tiny-toast": "^1.0.2"
 	},
 	"devDependencies": {
 		"@honkhonk/vite-plugin-svgr": "^1.1.0",

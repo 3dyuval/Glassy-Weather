@@ -6,9 +6,9 @@ import { notifyUser } from "../Utils";
 
 const api = () => {
     if (process.env.NODE_ENV === 'production') {
-        return 'https://glassy-weather.herokuapp.com/city'
+        return process.env.SERVER_URL
     }
-    return 'http://localhost:8000/city/'
+    return process.env.LOCAL_SERVER_URL
 }
 
 
