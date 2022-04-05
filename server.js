@@ -15,7 +15,7 @@ app.listen(port, () => {
 // serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('dist'))
-    app.get('*', (req, res) => {
+    app.get('/', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
     })
 }
@@ -28,8 +28,8 @@ app.get('/city/:city', (req, res) => {
     axios.request(options)
         .then(response => {
             return new Promise((resolve, reject) => {
+                if (response.status === 200) resolve(res.json(response.data))
                 if (response.status !== 200) reject(`response status: ${response.status}`)
-                resolve(res.json(response.data))
             })
         }).catch(error => {
             return error
