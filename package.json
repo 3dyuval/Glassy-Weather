@@ -4,7 +4,10 @@
 	"version": "1.0.5",
 	"scripts": {
 		"dev": "vite",
-		"server": "nodemon api/",
+		"start": "node server.js",
+		"server": "nodemon server.js",
+		"client": "npm start",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",
 		"build": "vite build",
 		"preview": "vite preview"
 	},

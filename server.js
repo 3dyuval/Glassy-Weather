@@ -1,8 +1,8 @@
-const port = process.env.PORT
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
 require('dotenv').config()
+const port = process.env.PORT
 
 const app = express()
 
@@ -12,10 +12,11 @@ app.listen(port, () => {
     console.log(`server is listening at port: ${port || 8000}`)
 })
 
+// serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('build'))
+    app.use(express.static('dist'))
     app.get('*', (req, res) => {
-        req.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+        req.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
     })
 }
 
