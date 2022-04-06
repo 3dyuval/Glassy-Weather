@@ -17,7 +17,6 @@ app.get('/', (req, res, next) => {
 
 
 app.get('/city/:city', (req, res, next) => {
-    console.log('get city')
     const options = {
         method: "GET",
         url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_KEY}&q=${req.params.city}&days=3&aqi=no&alerts=no`
@@ -26,11 +25,10 @@ app.get('/city/:city', (req, res, next) => {
         .then(response => {
             return new Promise((resolve, reject) => {
                 console.log("response", response)
-                if (response.status === 200) resolve(res.json(response.data))
+                if (response.status === 200) resolve(response.data)
                 if (response.status !== 200) reject(`response status: ${response.status}`)
             })
         }).catch(error => {
-            console.log("error", error)
             return error
         })
     next()
