@@ -9,16 +9,14 @@ var port = process.env.PORT || 8000
 const app = express()
 app.use(cors())
 
-app.listen(port, () => {
-    console.log(`server is listening at port: ${port || 8000}`)
-})
+
 
 // serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'dist')))
+if (process.env.NODE_ENV === "production") {
+    // app.use(express.static(__dirname, 'dist'))
 
-    app.get('*', (req, res) => {
-        return res(path.resolve(__dirname, 'dist'))
+    app.get('/', (req, res) => {
+        return res.send(path.resolve(__dirname, 'dist', 'index.html'))
     })
 }
 
@@ -37,4 +35,9 @@ app.get('/city/:city', (req, res) => {
             return error
         })
 
+})
+
+
+app.listen(port, () => {
+    console.log(`server is listening at port: ${port || 8000}`)
 })
