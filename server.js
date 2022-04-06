@@ -11,12 +11,12 @@ app.use(cors())
 
 // serve static assets if in production
 app.use(express.static('dist'))
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
     return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
 })
 
 
-app.get('/city/:city', (req, res) => {
+app.get('/city/:city', (req, res, next) => {
     const options = {
         method: "GET",
         url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_KEY}&q=${req.params.city}&days=3&aqi=no&alerts=no`
