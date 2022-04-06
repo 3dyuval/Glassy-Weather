@@ -1,10 +1,22 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import svgr from '@honkhonk/vite-plugin-svgr'
-// https://vitejs.dev/config/
+import react from '@vitejs/plugin-react'
+import { viteExternalsPlugin as externals } from 'vite-plugin-externals';
+
 export default defineConfig({
+  ...,
+  esbuild: {
+    jsxFactory: "React.createElemennt",
+    jsxFragment: "React.Fragment"
+  },
   plugins: [
-    react(),
-    svgr()
+    react({
+      jsxRuntime: "classic"
+    }),
+    svgr(),
+    externals({
+      react: 'window.React',
+      'react-dom': 'window.ReactDOM'
+    }, { useWindow: false })
   ]
 })
