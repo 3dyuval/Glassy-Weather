@@ -12,6 +12,7 @@ app.use(cors())
 app.use(express.static('dist'))
 app.get('/', (req, res, next) => {
     return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+    next()
 })
 
 
@@ -29,7 +30,7 @@ app.get('/city/:city', (req, res, next) => {
         }).catch(error => {
             return error
         })
-
+    next()
 })
 
 
