@@ -5,11 +5,11 @@
 	"scripts": {
 		"dev": "vite",
 		"start": "node server.js",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",
 		"server": "nodemon server.js",
 		"client": "npm start",
 		"build": "vite build",
-		"preview": "vite preview",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+		"preview": "vite preview"
 	},
 	"dependencies": {
 		"axios": "^0.26.1",

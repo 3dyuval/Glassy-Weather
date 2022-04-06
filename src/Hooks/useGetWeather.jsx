@@ -3,16 +3,24 @@ import { useState, useEffect } from "react";
 import * as Utils from "../Utils"
 import { notifyUser } from "../Utils";
 
-
 export function useGetWeather(city = null) {
 
     const [weather, setWeather] = useState(null)
     const [isLoading, setLoading] = useState(false)
 
+    const url = () => {
+        if (import.meta.env.MODE === 'development') {
+            return import.meta.env.VITE_WEATHER_URL
+        }
+        return "https://https://glassy-weather.herokuapp.com:8080/city/"
+    }
+
+
+
     function getWeather(city, notification = null) {
         setLoading(true)
         try {
-            axios.get('/city/' + city)
+            axios.get(url() + city)
                 .then(response => {
                     notifyUser(notification ? notification : `${response.data.location.name} weather fetched`)
                     setWeather({
