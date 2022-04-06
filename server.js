@@ -1,24 +1,20 @@
-require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
 const path = require('path')
 
-var port = process.env.PORT || 8000
+require('dotenv').config()
+const port = process.env.PORT || 8000
 
 const app = express()
 app.use(cors())
 
-
-
 // serve static assets if in production
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static('dist'))
+app.use(express.static('dist'))
+app.get('/', (req, res) => {
+    return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+})
 
-    app.get('/', (req, res) => {
-        return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
-    })
-}
 
 app.get('/city/:city', (req, res) => {
     const options = {
