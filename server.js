@@ -25,14 +25,15 @@ app.get('/city/:city', (req, res, next) => {
     axios.request(options)
         .then(response => {
             return new Promise((resolve, reject) => {
+                console.log("response", response)
                 if (response.status === 200) resolve(res.json(response.data))
                 if (response.status !== 200) reject(`response status: ${response.status}`)
-                console.log("response", response)
             })
         }).catch(error => {
+            console.log("error", error)
             return error
         })
-
+    next()
 })
 
 app.get('/test', (req, res) => {
