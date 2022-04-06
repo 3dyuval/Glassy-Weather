@@ -11,7 +11,7 @@ app.use(cors())
 // serve static assets if in production
 app.use(express.static('dist'))
 app.get('/', (req, res, next) => {
-    return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
     next()
 })
 
