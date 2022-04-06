@@ -12,6 +12,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@babel/plugin-transform-react-jsx": "^7.17.3",
 		"axios": "^0.26.1",
 		"cors": "^2.8.5",
 		"date-fns": "^2.27.0",
