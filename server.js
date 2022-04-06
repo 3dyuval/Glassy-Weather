@@ -30,9 +30,12 @@ app.get('/city/:city', (req, res, next) => {
         }).catch(error => {
             return error
         })
-    next()
+
 })
 
+app.get('/test', (req, res) => {
+    return res.json('hey')
+})
 
 app.listen(process.env.PORT || 8000, () => {
     console.log(`server is listening at port: ${process.env.PORT || 8000}`)
