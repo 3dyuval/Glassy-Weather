@@ -13,9 +13,9 @@ app.use(cors())
 
 // serve static assets if in production
 if (process.env.NODE_ENV === "production") {
-    // app.use(express.static(__dirname, 'dist'))
+    app.use(express.static('dist'))
 
-    app.get('/', (req, res) => {
+    app.get('*', (req, res) => {
         return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
     })
 }
