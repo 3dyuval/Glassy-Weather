@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
     // app.use(express.static(__dirname, 'dist'))
 
     app.get('/', (req, res) => {
-        return res.send(path.resolve(__dirname, 'dist', 'index.html'))
+        return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
     })
 }
 
