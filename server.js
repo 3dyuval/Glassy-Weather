@@ -4,7 +4,6 @@ const axios = require('axios')
 const path = require('path')
 
 require('dotenv').config()
-const port = process.env.PORT || 8000
 
 const app = express()
 app.use(cors())
@@ -34,6 +33,6 @@ app.get('/city/:city', (req, res, next) => {
 })
 
 
-app.listen(port, () => {
-    console.log(`server is listening at port: ${port || 8000}`)
+app.listen(process.env.PORT, () => {
+    console.log(`server is listening at port: ${process.env.PORT || 8000}`)
 })

@@ -12,10 +12,8 @@ export function useGetWeather(city = null) {
         if (import.meta.env.MODE === 'development') {
             return import.meta.env.VITE_WEATHER_URL
         }
-        return "/city/"
+        return `${process.env.PORT}:/city/`
     }
-
-
 
     function getWeather(city, notification = null) {
         setLoading(true)
