@@ -12,7 +12,7 @@ export function useGetWeather(city = null) {
         if (import.meta.env.MODE === 'development') {
             return import.meta.env.VITE_WEATHER_URL
         }
-        return "https://https://glassy-weather.herokuapp.com:8080/city/"
+        return "/city/"
     }
 
 

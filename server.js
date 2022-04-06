@@ -15,7 +15,7 @@ app.use(cors())
 if (process.env.NODE_ENV === "production") {
     app.use(express.static('dist'))
 
-    app.get('*', (req, res) => {
+    app.get('/', (req, res) => {
         return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
     })
 }
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 app.get('/city/:city', (req, res) => {
     const options = {
         method: "GET",
-        url: `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_KEY}&q=${req.params.city}&days=3&aqi=no&alerts=no`
+        url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_KEY}&q=${req.params.city}&days=3&aqi=no&alerts=no`
     }
     axios.request(options)
         .then(response => {
