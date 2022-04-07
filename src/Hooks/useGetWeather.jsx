@@ -13,6 +13,7 @@ export function useGetWeather(city = null) {
             return import.meta.env.VITE_WEATHER_URL
         }
         return '/city/'
+
     }
 
     function getWeather(city, notification = null) {
