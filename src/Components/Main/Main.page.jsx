@@ -5,7 +5,7 @@ import City from '../City'
 
 function Main(props) {
 
-    const { weather, isLoading, cities, setSelectedCity } = props
+    const { weather, isLoading, cities, setSelectedCity, selectedCity } = props
 
     if (!cities) return null
     return (<>
@@ -18,6 +18,7 @@ function Main(props) {
                     <City key={itm.id}
                         isLoading={isLoading}
                         weather={weather}
+                        selectedCity={selectedCity}
                     />
                 </CarouselItem>)
             )}

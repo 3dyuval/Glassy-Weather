@@ -23,6 +23,7 @@ function Carousel({ children, cities, setSelectedCity }) {
   });
 
   useEffect(() => {
+
     setSelectedCity(cities[activeIndex].name);
   }, [activeIndex]);
 

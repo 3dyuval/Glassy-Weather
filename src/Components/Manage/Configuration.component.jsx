@@ -4,11 +4,11 @@ import ConfigItem from './ConfigItem';
 
 function Configuration(props) {
 
-    const { getWeather, weather } = useGetWeather()
+    const { fetchWeather, weather } = useGetWeather()
     const { config, dispatch } = props;
 
     useEffect(() => {
-        getWeather("Rome")
+        fetchWeather("Rome")
     }, [])
 
     function handleToggleSwitch(e) {

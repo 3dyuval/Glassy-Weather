@@ -1,47 +1,56 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import * as Utils from "../Utils"
-import { notifyUser } from "../Utils";
+import * as Utils from "../utils"
 
-export function useGetWeather(city = null) {
+export function useGetWeather() {
 
-    const [weather, setWeather] = useState(null)
     const [isLoading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [weather, setWeather] = useState(null)
 
-    const url = () => {
+
+    useEffect(() => {
+        console.log(weather)
+    }, [weather])
+
+
+    const fetchUrl = (cityName) => {
         if (import.meta.env.MODE === 'development') {
-            return import.meta.env.VITE_WEATHER_URL
+            return import.meta.env.VITE_WEATHER_URL + cityName
         }
-        return '/city/'
-
+        return `/city/${cityName}`
     }
 
-    function getWeather(city, notification = null) {
-        setLoading(true)
-        try {
-            axios.get(url() + city)
-                .then(response => {
-                    notifyUser(notification ? notification : `${response.data.location.name} weather fetched`)
-                    setWeather({
-                        metadata: response.data.location,
-                        hours: Utils.getHours(response.data),
-                        days: Utils.getDays(response.data),
-                        stats: Utils.getStats(response.data.current),
-                        graphic: Utils.getGraphic(response.data.current.condition.code)
-                    })
 
+    function fetchWeather(cityName) {
+        setLoading(true)
+
+        const url = fetchUrl(cityName)
+        // console.log('fetching url', url)
+
+        try {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const sortedWeatherData = getWeatherData(data)
+                    setWeather(sortedWeatherData)
                 })
         } catch (error) {
-            console.error(error)
+            setError(true)
         } finally {
             setLoading(false)
         }
     }
 
-    useEffect(() => {
-        if (!city) return
-        getWeather(city)
-    }, [])
 
-    return { weather, getWeather, isLoading }
+    function getWeatherData(data) {
+        return ({
+            metadata: data.location,
+            hours: Utils.getHours(data),
+            days: Utils.getDays(data),
+            stats: Utils.getStats(data.current),
+            graphic: Utils.getGraphic(data.current.condition.code)
+        })
+    }
+
+    return { weather, fetchWeather, getWeatherData, isLoading, error }
 }

@@ -1,7 +1,7 @@
-import React, { useState, useReducer, useEffect, useLayoutEffect } from "react"
+import React, { useState, useReducer, useEffect, useLayoutEffect, useRef } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import "./Index.scss"
-import * as defaultData from './Data'
+import * as defaultData from './constants'
 import { useLocalStorage, useGetWeather } from "./Hooks/"
 import { ToastContainer } from 'react-tiny-toast';
 // components //
@@ -11,7 +11,7 @@ import Main from "./Components/Main/Main.page"
 import Manage from "./Components/Manage/Manage.component"
 import Modal from "./Components/Modal/Modal.wrapper"
 import Configuration from "./Components/Manage/Configuration.component"
-import { notifyUser } from "./Utils"
+import { notifyUser } from "./utils"
 
 /*
 * Weather App  
@@ -49,7 +49,6 @@ function configReducer(state, action) {
       return { stats: state.stats.filter(itm => itm.statName != action.payload) }
     }
     case 'toggle': {
-      console.log(action.payload)
       if (!action.payload.checked) {
         notifyUser(action.payload.statName + ' removed')
         return { ...state, stats: state.stats.filter(itm => itm.statName !== action.payload.statName) }
@@ -65,14 +64,15 @@ function configReducer(state, action) {
 }
 
 export default function App() {
-  const { weather, getWeather, isLoading } = useGetWeather(); // my custom hook 
+  const { fetchWeather, weather, isLoading, error } = useGetWeather(); // my custom hook 
+
 
   const [cities, dispatchCities] = useReducer(citiesReducer, [], () => {
     const storage = JSON.parse(localStorage.getItem("cities"))
     return storage || defaultData.DEFAULT_CITIES
   })
 
-  const [selectedCity, setSelectedCity] = useState(() => cities[0] || defaultData.DEFAULT_CITIES[0])
+  const [selectedCity, setSelectedCity] = useState(() => cities[0].name || defaultData.DEFAULT_CITIES[0])
 
   const [config, dispatchConfig] = useReducer(configReducer, [], () => {
     const storage = JSON.parse(localStorage.getItem("config"))
@@ -81,11 +81,17 @@ export default function App() {
 
   const [darkMode, setDarkMode] = useState(config?.settings?.darkMode ?? false)
 
-
   useLayoutEffect(() => {
     document.title = `Weather in ${selectedCity}`
-    getWeather(selectedCity)
   }, [selectedCity])
+
+
+  // fetch weather data on when selecting a city
+  useEffect(() => {
+    fetchWeather(selectedCity)
+  }, [selectedCity])
+
+
 
   useEffect(() => {
     if (!cities) return
@@ -102,7 +108,7 @@ export default function App() {
           <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
         </Header>
         <Routes>
-          <Route path='*' element={<Main weather={weather} cities={cities} setSelectedCity={setSelectedCity} />} />
+          <Route path='*' element={<Main weather={weather} cities={cities} setSelectedCity={setSelectedCity} selectedCity={selectedCity} />} />
           <Route path="/manage/" element={<Manage citiesActions={citiesActions} cities={cities} dispatch={dispatchCities}
           />}>
             <Route path="/manage/configuration" element={<Modal ><Configuration config={config} dispatch={dispatchConfig} darkMode={darkMode} setDarkMode={setDarkMode} /></Modal>} />
