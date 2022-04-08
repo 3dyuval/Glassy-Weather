@@ -27,6 +27,7 @@
 		"react-spring": "^9.4.3",
 		"react-swipeable": "^6.2.0",
 		"react-tiny-toast": "^1.0.2",
+		"rollup-plugin-copy": "^3.4.0",
 		"vite-plugin-externals": "^0.4.0"
 	},
 	"devDependencies": {
