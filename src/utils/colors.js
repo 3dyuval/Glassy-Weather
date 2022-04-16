@@ -32,8 +32,6 @@ const byTime = (time) => {
     return color
 }
 
-
-
 const setStyleSheet = (mode) => {
     const dark = '/src/assets/colors/dark.css'
     const light = '/src/assets/colors/light.css'
