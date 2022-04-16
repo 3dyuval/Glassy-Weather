@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as Utils from "../utils"
 
 export function useGetWeather() {
@@ -6,12 +6,6 @@ export function useGetWeather() {
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [weather, setWeather] = useState(null)
-
-
-    useEffect(() => {
-        console.log(weather)
-    }, [weather])
-
 
     const fetchUrl = (cityName) => {
         if (import.meta.env.MODE === 'development') {
@@ -25,7 +19,6 @@ export function useGetWeather() {
         setLoading(true)
 
         const url = fetchUrl(cityName)
-        // console.log('fetching url', url)
 
         try {
             fetch(url)
@@ -48,9 +41,10 @@ export function useGetWeather() {
             hours: Utils.getHours(data),
             days: Utils.getDays(data),
             stats: Utils.getStats(data.current),
-            graphic: Utils.getGraphic(data.current.condition.code)
+            graphic: Utils.getGraphic(data.current.condition.code),
+            color: Utils.colors.byTime(data.location.localtime)
         })
     }
 
-    return { weather, fetchWeather, getWeatherData, isLoading, error }
+    return { weather, fetchWeather, getWeatherData, isLoading, error, fetchUrl }
 }

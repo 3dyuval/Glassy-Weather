@@ -1,0 +1,18 @@
+:root {
+	--primary-color: #738cff;
+	--secondary-color: #738cff;
+	--primary-color2: #859BC6;
+	--secondary-color2: #A5ABB7;
+
+	--txt-col-100: #6C7B82;
+	--txt-col-200: #97969F;
+	--txt-col-300: #D2D5DF;
+	--txt-col-400: #F0F7FE;
+	--txt-col-500: #FCFFFD;
+
+	--bg-col-100: rgb(45, 34, 55);
+	--bg-col-200: #3E415F;
+	--bg-col-200: #47536C;
+	--bg-col-500: #D5DCEC;
+}
+

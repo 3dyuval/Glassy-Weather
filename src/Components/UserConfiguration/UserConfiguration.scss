@@ -1,0 +1,17 @@
+.config {
+	max-height: clamp(60vh, 800px, 80vh);
+	li {
+		display: flex;
+		justify-content: space-between;
+		padding: $pad1;
+		border-top: 1px solid $col-400;
+		.left {
+			.name {
+				font-weight: 700;
+			}
+			.id {
+				font-weight: 500;
+			}
+		}
+	}
+}

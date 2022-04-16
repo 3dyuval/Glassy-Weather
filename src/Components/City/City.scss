@@ -1,0 +1,57 @@
+.days {
+	background-color: $col-200;
+	padding: $pad1;
+	margin: $pad1;
+	border-radius: $secondary-radius;
+}
+
+.city {
+	//pos
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	max-width: 80vw;
+}
+.city-header {
+	margin: 1em;
+}
+
+.city-primary {
+	scrolling: horizontally;
+	overflow-x: auto;
+	overflow-y: hidden;
+	webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	@include component-100;
+}
+
+.days {
+	width: 30vw;
+	overflow-y: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.city-body {
+	display: flex;
+	flex-direction: row;
+}
+
+@media only screen and (max-width: 760px) {
+	.city {
+		max-width: 95%;
+	}
+	.city-body {
+		flex-direction: column-reverse;
+	}
+	.days {
+		width: auto;
+	}
+}

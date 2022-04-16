@@ -3,17 +3,17 @@
 	"private": true,
 	"version": "1.0.5",
 	"scripts": {
-		"dev": "vite",
+		"client": "vite",
 		"start": "node server.js",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",
-		"server": "nodemon server.js",
-		"client": "npm start",
+		"dev": "concurrently \"npm run start\" \"npm run client\"",
 		"build": "vite build",
 		"preview": "vite preview"
 	},
 	"dependencies": {
 		"@babel/plugin-transform-react-jsx": "^7.17.3",
 		"axios": "^0.26.1",
+		"clsx": "^1.1.1",
 		"cors": "^2.8.5",
 		"date-fns": "^2.27.0",
 		"dotenv": "^16.0.0",
@@ -36,7 +36,6 @@
 		"autoprefixer": "^10.4.4",
 		"postcss": "^8.4.12",
 		"sass": "^1.49.9",
-		"tailwindcss": "^3.0.23",
 		"vite": "^2.8.0"
 	},
 	"engines": {

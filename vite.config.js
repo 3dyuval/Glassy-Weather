@@ -4,34 +4,39 @@ import svgr from '@honkhonk/vite-plugin-svgr'
 import copy from 'rollup-plugin-copy'
 
 // https://vitejs.dev/config/
+
+const devConfig = {
+  plugins: [
+    react(),
+    svgr()
+  ]
+}
+
+const buildConfig = {
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }],
+        ]
+      }
+    }),
+    svgr(),
+    copy({
+      targets: [{ src: 'src/assets/*', dest: 'dist/assets' }],
+      // { src: 'src/assets/colors', dest: 'dist/assets' }],
+      hook: 'writeBundle'
+    }),
+  ]
+}
+
+
+
 export default defineConfig(({ command, mode }) => {
   if (command === 'build') {
-    return {
-      plugins: [
-        react({
-          babel: {
-            plugins: [
-              ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }],
-            ]
-          }
-        }),
-        svgr(),
-        copy({
-          targets: [{ src: 'src/Assets/WeatherConditions', dest: 'dist/assets' }],
-          hook: 'writeBundle'
-        }),
-      ]
-    }
+    return buildConfig
   } else {
-    return {
-      server: {
-        port: 3001
-      },
-      plugins: [
-        react(),
-        svgr()
-      ]
-    }
+    return devConfig
   }
 })
 
