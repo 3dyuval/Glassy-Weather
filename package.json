@@ -20,7 +20,6 @@
 		"express": "^4.17.3",
 		"node-fetch": "2.0",
 		"nodemon": "^2.0.15",
-		"postcss-import": "^14.1.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-router-dom": "^6.0.0",
@@ -33,8 +32,6 @@
 	"devDependencies": {
 		"@honkhonk/vite-plugin-svgr": "^1.1.0",
 		"@vitejs/plugin-react": "^1.0.7",
-		"autoprefixer": "^10.4.4",
-		"postcss": "^8.4.12",
 		"sass": "^1.49.9",
 		"vite": "^2.8.0"
 	},
