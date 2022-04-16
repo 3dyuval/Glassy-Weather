@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Stats from '../Stats'
-import { dummyDays } from '../../../utils'
+import { dummyDays, getGraphic } from '../../../utils'
 import clsx from 'clsx'
 
 function Days({ weather, isLoading }) {
@@ -26,7 +26,7 @@ function Days({ weather, isLoading }) {
 export default Days
 
 function Day({ setSelectedDay, selectedDay, day }) {
-    const { date, name, stats, temp, condition } = day;
+    const { date, name, stats, temp, graphic } = day;
 
     const classNames = clsx({
         day: true,
@@ -43,7 +43,7 @@ function Day({ setSelectedDay, selectedDay, day }) {
                 </div>
                 <div className="right">
                     <div className="temp">{temp}</div>
-                    <div>{condition && <img src={condition}></img>}</div>
+                    <div className="graphic-day">{graphic && <img src={getGraphic(graphic)}></img>}</div>
                 </div>
             </div>
 

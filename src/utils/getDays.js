@@ -13,7 +13,7 @@ export function getDays(weather) {
             date: formatDate(itm.date),
             name: formatDay(itm.date),
             temp: itm.day.avgtemp_c,
-            condition: itm.day.condition.icon,
+            graphic: itm.day.condition.code,
         }
     })
 }
