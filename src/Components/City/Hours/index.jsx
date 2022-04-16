@@ -1,6 +1,6 @@
 import React from "react"
 import Hour from "./Hour"
-import { dummyHours } from "../../../Utils"
+import { dummyHours } from "../../../utils"
 
 import { LoadingAnimation, LoadedAnimation } from "./HoursAnimation";
 

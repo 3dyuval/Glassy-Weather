@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from "react"
-import { setStyleSheet } from "../utils/colors"
+import { colors } from "../utils"
 
 function useColor() {
 
@@ -7,7 +7,7 @@ function useColor() {
 
     useLayoutEffect(() => {
         document.body.className = colorCode
-        setStyleSheet(colorCode)
+        colors.setStyleSheet(colorCode)
     }, [colorCode])
 
     //get and set color mode

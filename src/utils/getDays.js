@@ -1,5 +1,5 @@
 import format from "date-fns/format"
-import * as Utils from "../Utils"
+import * as Utils from "../utils"
 
 export function getDays(weather) {
 

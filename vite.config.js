@@ -18,8 +18,7 @@ export default defineConfig(({ command, mode }) => {
         }),
         svgr(),
         copy({
-          targets: [{ src: 'src/assets/*', dest: 'dist/assets' }],
-          // { src: 'src/assets/colors', dest: 'dist/assets' }],
+          targets: [{ src: 'src/assets/WeatherConditions', dest: 'dist/assets' }, { src: 'src/assets/colors', dest: 'dist/assets' }],
           hook: 'writeBundle'
         }),
       ]

@@ -7,9 +7,10 @@ require('dotenv').config()
 
 const app = express()
 
-app.use(cors())
+if (process.env.NODE_ENV === 'development') {
+    app.use(cors())
 
-
+}
 
 // serve static assets if in production
 app.use(express.static('dist'))

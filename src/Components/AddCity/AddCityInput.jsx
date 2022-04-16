@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useGetWeather } from '../../Hooks/useGetWeather'
-import { notifyUser } from "../../Utils"
+import { notifyUser } from "../../utils"
 
 function AddCityInput({ dispatch, citiesActions }) {
     const { fetchUrl } = useGetWeather()
