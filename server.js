@@ -14,7 +14,7 @@ app.get('/', (req, res, next) => {
     next()
 })
 
-app.use(express.static(path.join(__dirname, 'src')));
+// app.use(express.static(path.join(__dirname, 'src')));
 
 app.get('/city/:city', async (req, res) => {
     const data = await fetchWeather(req.params.city)

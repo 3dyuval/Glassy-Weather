@@ -15,7 +15,6 @@ function Hour({ hour, animate, index }) {
     // const timeValue = (index === 0) ? 'NOW' : format(new Date(time), "HH:mm")
     const timeValue = format(new Date(time), "HH:mm")
     const dayOrNight = (new Date(time).getHours() > 6 && new Date(time).getHours() < 18) ? true : false
-    console.log(dayOrNight)
     return (
         <div className='hour'>
             <div className="time">{timeValue}</div>

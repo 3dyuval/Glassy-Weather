@@ -28,10 +28,7 @@ function Day({ day, index, selected, setSelectedDay }) {
     const { date, name, stats, temp, graphic } = day;
 
     return (
-        <div className={`day list-item ${selected ? 'selected' : ''}`} onClick={(e) => {
-            setSelectedDay(index)
-            console.log(index)
-        }}>
+        <div className={`day list-item ${selected ? 'selected' : ''}`} onClick={(e) => { setSelectedDay(index) }}>
             <div className="top">
                 <div className="left">
                     <div>{name}</div>
