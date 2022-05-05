@@ -13,7 +13,6 @@ function Main(props) {
             cities={cities}
             setSelectedCity={setSelectedCity}
         >
-
             {cities.map(itm => (
                 <CarouselItem key={itm.id}>
                     <City key={itm.id}

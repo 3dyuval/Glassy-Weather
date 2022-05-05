@@ -12,15 +12,18 @@ function Hour({ hour, animate, index }) {
     })
 
 
-    const timeValue = (index === 0) ? 'NOW' : format(new Date(time), "HH:mm")
-
+    // const timeValue = (index === 0) ? 'NOW' : format(new Date(time), "HH:mm")
+    const timeValue = format(new Date(time), "HH:mm")
+    const dayOrNight = (new Date(time).getHours() > 6 && new Date(time).getHours() < 18) ? true : false
+    console.log(dayOrNight)
     return (
         <div className='hour'>
             <div className="time">{timeValue}</div>
             <div className="hour-container">
-                <img className="icon" src={getGraphic(condition.code)} style={{ opacity: animate ? 0 : 1 }} />
-                <div>{temp_c}</div>
-                {/* <a.div className="temp-txt" style={{ opacity: animate ? 0 : 1 }}>{animatedTemp.value.to(n => n.toFixed(1))}</a.div> */}
+                <img className="icon" src={getGraphic(condition.code, true, dayOrNight)} style={{ opacity: animate ? 0 : 1 }} />
+                <a.div className="temp-txt" style={{ opacity: animate ? 0 : 1 }}>{animatedTemp.value.to(n => n.toFixed(1))}</a.div>
+                {/* To disable the text animation just uncomment */}
+                {/* <div>{temp_c}</div> */}
             </div>
         </div>
     )

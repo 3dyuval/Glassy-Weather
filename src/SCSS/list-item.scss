@@ -1,0 +1,20 @@
+.list-item {
+	margin: $pad0;
+	padding: $pad1;
+	border-radius: $secondary-radius;
+	background-color: var(--bg-col-200);
+	max-width: 300px;
+
+	&:hover {
+		box-shadow: 0px 4px 4px 0px #738cff66;
+		transition-duration: $animation-duration;
+	}
+
+	&:active {
+		outline: 2px solid #738cffcc;
+	}
+
+	&.selected {
+		outline: 3px solid var(--primary-color);
+	}
+}

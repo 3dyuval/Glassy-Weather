@@ -42,6 +42,7 @@ export default function App() {
 
   useEffect(() => {
     if (!weather) return
+    console.log(weather)
     updateColor(weather.color.name)
   }, [weather])
 
@@ -71,7 +72,8 @@ export default function App() {
             <NavBar />
           </Header>
           <Routes>
-            <Route path='*' element={<Main weather={weather} cities={cities} setSelectedCity={setSelectedCity} selectedCity={selectedCity} />} />
+            <Route path="/:city" element={<Homepage weather={weather} cities={cities} setSelectedCity={setSelectedCity} selectedCity={selectedCity} />} />
+            <Route exact path='/' element={<Main weather={weather} cities={cities} setSelectedCity={setSelectedCity} selectedCity={selectedCity} />} />
             <Route path="/manage/" element={<Manage citiesActions={reducer.citiesActions} cities={cities} dispatch={dispatchCities}
             />}>
               <Route path="/manage/configuration" element={<Modal ><Configuration /></Modal>} />

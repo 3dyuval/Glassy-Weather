@@ -7,18 +7,14 @@ require('dotenv').config()
 
 const app = express()
 
-// if (process.env.NODE_ENV === 'development') {
-//     app.use(cors())
-// }
-
 app.use(cors())
-// serve static assets if in production
 app.use(express.static('dist'))
 app.get('/', (req, res, next) => {
     res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
     next()
 })
 
+app.use(express.static(path.join(__dirname, 'src')));
 
 app.get('/city/:city', async (req, res) => {
     const data = await fetchWeather(req.params.city)

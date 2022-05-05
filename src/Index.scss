@@ -1,5 +1,7 @@
 @import './SCSS/reset.css';
 @import './SCSS/GlobalStyles.scss';
+@import './SCSS/search.scss';
+@import './SCSS/list-item.scss';
 @import './Pages/Main/Carousel.scss';
 @import './Pages/Main/BackgroundAnimation.scss';
 @import './SCSS/App.scss';
@@ -7,6 +9,7 @@
 @import './Pages/Manage/Manage.scss';
 @import './Components/UserConfiguration/UserConfiguration.scss';
 @import './Components/City/City.scss';
+@import './Components/AddCity/AddCity.scss';
 @import './Components/City/Stats/Stats.scss';
 @import './Components/City/Days/Days.scss';
 @import './Components/City/Hours/Hours.scss';

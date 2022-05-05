@@ -5,6 +5,7 @@
 $main-radius: 2.25rem;
 $secondary-radius: 1rem;
 
+$pad0: 0.25em;
 $pad1: 1em;
 $pad2: 2em;
 $pad3: 3em;
@@ -36,6 +37,7 @@ $animation-duration: 500ms;
 		rgba(185, 212, 239, 0.25) 100%
 	);
 	backdrop-filter: blur(25px);
+	outline: 4px solid rgba(241, 246, 253, 0.25);
 	box-shadow: 0px -5.89964px 12px rgba(248, 252, 255, 0.25),
 		inset 0px 5.67273px 34.0364px rgba(248, 252, 255, 0.5);
 }
@@ -47,7 +49,7 @@ $animation-duration: 500ms;
 		rgba(185, 212, 239, 0.25) 100%
 	);
 	backdrop-filter: blur(25px);
-	border: 4px solid #d5dcec;
+	outline: 4px solid rgba(213, 220, 236, 0.25);
 	box-shadow: 0px -5.89964px 12px rgba(248, 252, 255, 0.25),
 		inset 0px 5.67273px 34.0364px rgba(248, 252, 255, 0.5);
 }
@@ -59,7 +61,7 @@ $animation-duration: 500ms;
 		rgba(186, 199, 203, 0.35) 100%
 	);
 	backdrop-filter: blur(45px);
-	border: 2px solid rgba(170, 185, 203, 0.15);
+	outline: 2px solid rgba(170, 185, 203, 0.15);
 	box-shadow: 0px -5.67273px 18px rgba(159, 180, 221, 0.25),
 		inset 0px 5.67273px 34.0364px rgba(159, 180, 221, 0.25);
 }
@@ -71,7 +73,7 @@ $animation-duration: 500ms;
 		rgba(186, 199, 203, 0.15) 100%
 	);
 	backdrop-filter: blur(45px);
-	border: 2px solid rgba(170, 185, 203, 0.15);
+	outline: 2px solid rgba(170, 185, 203, 0.15);
 	box-shadow: 0px -5.67273px 17.0182px rgba(159, 180, 221, 0.25),
 		inset 0px 5.67273px 34.0364px rgba(159, 180, 221, 0.25);
 }

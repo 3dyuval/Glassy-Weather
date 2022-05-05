@@ -2,6 +2,7 @@ import React from "react"
 import AddCityInput from "../../Components/AddCity/AddCityInput"
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AutoComplete from "../../Components/AddCity/AutoComplete";
 
 export default function Manage(props) {
   const { cities, dispatch, citiesActions } = props

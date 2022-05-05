@@ -38,10 +38,10 @@ export function useGetWeather() {
     function getWeatherData(data) {
         return ({
             metadata: data.location,
-            hours: Utils.getHours(data),
+            hours: Utils.getHours([...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]),
             days: Utils.getDays(data),
             stats: Utils.getStats(data.current),
-            graphic: Utils.getGraphic(data.current.condition.code),
+            graphic: Utils.getGraphic(data.current.condition.code, false),
             color: Utils.colors.byTime(data.location.localtime)
         })
     }

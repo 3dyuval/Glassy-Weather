@@ -1,9 +1,5 @@
 .day {
-	margin: $pad1;
 	padding: $pad1;
-	border-radius: $secondary-radius;
-	background-color: var(--bg-col-200);
-	max-width: 300px;
 	.bottom {
 		opacity: 0;
 		display: hidden;
@@ -12,10 +8,7 @@
 		display: flex;
 		overflow-y: hidden;
 	}
-
 	&.selected {
-		border: 3px solid var(--primary-color);
-
 		.bottom {
 			opacity: 1;
 			display: show;

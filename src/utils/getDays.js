@@ -1,5 +1,6 @@
 import format from "date-fns/format"
 import * as Utils from "../utils"
+import { getGraphic } from "./getGraphic"
 
 export function getDays(weather) {
 
@@ -9,11 +10,12 @@ export function getDays(weather) {
 
     return weather.forecast.forecastday.map(itm => {
         return {
+            hours: Utils.getHours(itm.hour),
             stats: Utils.getStats(itm.day),
             date: formatDate(itm.date),
             name: formatDay(itm.date),
             temp: itm.day.avgtemp_c,
-            graphic: itm.day.condition.code,
+            graphic: getGraphic(itm.day.condition.code),
         }
     })
 }

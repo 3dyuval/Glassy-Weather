@@ -11,7 +11,7 @@ export function ConfigProvider({ children }) {
 
     const [userConfig, dispatchUserConfig] = useReducer(reducer, [],
         () => {
-            const storage = JSON.parse(localStorage.getItem("iserConfig"))
+            const storage = JSON.parse(localStorage.getItem("userConfig"))
             return storage || defaultData.DEFAULT_CONFIG
         }
     )

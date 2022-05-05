@@ -1,0 +1,35 @@
+.search {
+	/* Component 10/Hover */
+
+	box-sizing: border-box;
+	/* Auto layout */
+	font-size: $font-300;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 18px;
+
+	background: #ffffff;
+	border: 1px solid rgba(255, 255, 255, 0.8);
+	box-shadow: 0px 2px 2px rgba(115, 140, 255, 0.4);
+	border-radius: 30px;
+
+	/* Inside auto layout */
+	outline: none;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin: 12px 0px;
+	transition-duration: $animation-duration;
+	&:hover {
+		background: rgba(255, 255, 255, 0.5);
+		border: 1px solid rgba(255, 255, 255, 0.8);
+		box-shadow: 0px 4px 12px rgba(108, 167, 255, 0.6);
+		border-radius: 30px;
+	}
+
+	&:focus {
+		outline: 4px solid var(--primary-color2);
+	}
+}

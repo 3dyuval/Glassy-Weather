@@ -3,9 +3,8 @@ import { compareAsc } from "date-fns/esm"
 const NOW_INDEX = 0;
 const NEXT_12_HOURS = 13;
 
-export function getHours(weather) {
+export function getHours(hours) {
 
-    const hours = [...weather.forecast.forecastday[0].hour, ...weather.forecast.forecastday[1].hour]
     const fromCurrent = []
     for (let i = 0; i < hours.length; i++) {
         //Do not enter hours before now

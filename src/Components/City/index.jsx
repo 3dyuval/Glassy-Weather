@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Days from "./Days/"
 import Stats from "./Stats"
 import Hours from "./Hours"
@@ -6,6 +6,7 @@ import Hours from "./Hours"
 
 function City({ weather, isLoading, selectedCity }) {
 
+  const [selectedDay, setSelectedDay] = useState(0)
 
   return (
     <div className="city">
@@ -14,10 +15,20 @@ function City({ weather, isLoading, selectedCity }) {
         <h2>{weather?.metadata?.localtime ?? `Time in ${selectedCity}`}</h2>
       </div>
       <div className="city-body">
-        <Days weather={weather} isLoading={isLoading} />
+        <Days
+          weather={weather}
+          isLoading={isLoading}
+          selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay}
+        />
         <div className="city-primary">
-          <Hours animate={isLoading} hours={weather && weather.hours} />
-          {weather && <Stats stats={weather.stats} />}
+          <Hours
+            animate={isLoading}
+            hours={(selectedDay === 0) ? weather?.hours : weather?.days[selectedDay].hours ?? ''}
+          />
+          {weather && <Stats
+            stats={weather.stats}
+          />}
         </div>
       </div>
     </div>

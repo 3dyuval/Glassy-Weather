@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
-import Stats from '../Stats'
 import { dummyDays, getGraphic } from '../../../utils'
 import clsx from 'clsx'
 
-function Days({ weather, isLoading }) {
-
-    const [selectedDay, setSelectedDay] = useState('')
+function Days({ weather, selectedDay, setSelectedDay }) {
 
     const mapDays = (days) => {
-        return days.map(day => <Day
-            key={day.date}
-            day={day}
-            selectedDay={selectedDay}
+        return days.map((day, idx) => <Day
+            className="day list-item"
+            selected={idx === selectedDay}
             setSelectedDay={setSelectedDay}
+            key={idx}
+            day={day}
+            index={idx}
         />)
     }
     return (
@@ -25,17 +24,14 @@ function Days({ weather, isLoading }) {
 
 export default Days
 
-function Day({ setSelectedDay, selectedDay, day }) {
+function Day({ day, index, selected, setSelectedDay }) {
     const { date, name, stats, temp, graphic } = day;
 
-    const classNames = clsx({
-        day: true,
-        selected: selectedDay === day
-    })
-
     return (
-        <div onClick={(previousDay) => setSelectedDay((selectedDay !== day) ? day : '')}
-            className={classNames}>
+        <div className={`day list-item ${selected ? 'selected' : ''}`} onClick={(e) => {
+            setSelectedDay(index)
+            console.log(index)
+        }}>
             <div className="top">
                 <div className="left">
                     <div>{name}</div>

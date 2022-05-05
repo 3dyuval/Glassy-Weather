@@ -1,0 +1,1 @@
+.day .bottom{opacity:0;display:hidden;max-height:0;transition:all .25s ease-out;display:flex;overflow-y:hidden}.day.selected .bottom{opacity:1;display:show;max-height:500px}.top{display:flex;justify-content:space-between}.graphic-day img{max-width:55px}
