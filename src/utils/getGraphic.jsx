@@ -25,9 +25,9 @@ const URL = {
 
 /**
  * 
- * @param {code} Number The icon code 
- * @param {small} Bool The size of icon - small / large
- * @param {Bool} Bool If the time is between 6:00 to 18:00 get the day version
+ * @param {Number} code The icon code 
+ * @param {Bool} small The size of icon - small / large
+ * @param {Bool} day If the time is between 6:00 to 18:00 get the day version
  * @returns {String} Url to relative path
  */
 const getGraphic = (code, small = true, day = true) => {
@@ -36,6 +36,7 @@ const getGraphic = (code, small = true, day = true) => {
     if (!entry) {
         return ''
     }
+    // development URL
     if (import.meta.env.MODE === 'development') {
         if (day === true) {
             if (small === true) {
@@ -50,6 +51,7 @@ const getGraphic = (code, small = true, day = true) => {
                 return `${URL.DEVELOPMENT.LARGE.NIGHT}${entry.icon}.svg`
             }
         }
+        //production URL
     } else {
         if (day === true) {
             if (small === true) {

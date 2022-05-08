@@ -1,33 +1,17 @@
 import { useState } from 'react'
-import { useGetWeather } from '../../Hooks/useGetWeather'
-import { notifyUser } from "../../utils"
 import AutoComplete from './AutoComplete'
+import { useAddCity } from '../../Hooks'
+// import { useAddCity } from '../../Hooks'
 
-function AddCityInput({ dispatch, citiesActions }) {
-    const { fetchUrl } = useGetWeather()
+function AddCityInput() {
 
     const [input, setInput] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+    const { addCity, isLoading } = useAddCity()
 
     function handleButtonClick(event) {
         event.preventDefault()
         if (!input) return
-        setIsLoading(true)
-        try {
-            const url = fetchUrl(input)
-            fetch(url)
-                .then(response => response.json())
-                .then(parsed => {
-                    dispatch({ type: citiesActions.ADD_CITY, payload: parsed.location.name, })
-                    notifyUser(`${parsed.location.name} added`)
-                })
-        }
-        catch (err) {
-            notifyUser(`${err}`)
-        }
-        finally {
-            setIsLoading(false)
-        }
+        addCity(input)
     }
 
     return (

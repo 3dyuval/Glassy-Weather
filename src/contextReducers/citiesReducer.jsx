@@ -4,10 +4,7 @@ export const citiesActions = {
   DELETE_CITY: "DELETE_CITY",
 }
 
-
-
-
-export function cities(state, action) {
+export function citiesReducer(state, action) {
   switch (action.type) {
     case citiesActions.ADD_CITY: {
       //(validation of city name is done within the component)

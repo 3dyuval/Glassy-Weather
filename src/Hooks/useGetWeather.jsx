@@ -41,7 +41,7 @@ export function useGetWeather() {
             hours: Utils.getHours([...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]),
             days: Utils.getDays(data),
             stats: Utils.getStats(data.current),
-            graphic: Utils.getGraphic(data.current.condition.code, false),
+            graphic: Utils.getGraphic(data.current.condition.code, false, Utils.dayOrNight(data.location.localtime)),
             color: Utils.colors.byTime(data.location.localtime)
         })
     }

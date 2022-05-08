@@ -3,8 +3,8 @@ import { roundMinutes } from "./roundMinutes";
 const DUMMY_HOURS_MULTIPLIER = 12;
 
 
-// empty [obj] for empty boxes
-export const dummyHours = (
+// empty[obj] for empty boxes
+const dummyHours = (
     Array.from(
         { length: DUMMY_HOURS_MULTIPLIER }, ((item, idx) => {
             return {
@@ -15,3 +15,18 @@ export const dummyHours = (
         })
     )
 )
+
+
+// let dummyHours = []
+
+// for (let i = 0; i < DUMMY_HOURS_MULTIPLIER; i++) {
+//     dummyHours.push(
+//         {
+//             time: roundMinutes(new Date()) + i,
+//             condition: { icon: null },
+//             temp_c: 0
+//         }
+//     )
+// }
+
+export { dummyHours }

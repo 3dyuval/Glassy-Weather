@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { dummyDays, getGraphic } from '../../../utils'
-import clsx from 'clsx'
+import React from 'react'
+import { dummyDays, getGraphic } from "../../../utils"
 
 function Days({ weather, selectedDay, setSelectedDay }) {
 

@@ -5,14 +5,19 @@ import { dummyHours } from "../../../utils"
 import { LoadingAnimation, LoadedAnimation } from "./HoursAnimation";
 
 function Hours(props) {
-  const { animate, hours } = props
+  const { loading, hours } = props
 
-  function mapHours(arr) {
-    return arr.map((hour, index) => <Hour animate={animate} index={index} hour={hour} key={`hour${index}`} />)
+  if (loading || !hours) {
+    return (
+      <LoadingAnimation>
+        {dummyHours.map((hour, idx) => <Hour loading={true} hour={hour} key={`hour${idx}`} />)}
+      </LoadingAnimation>
+    )
+  } else {
+    return <LoadedAnimation>
+      {hours.map((hour, idx) => <Hour loading={false} hour={hour} key={`hour${idx}`} />)}
+    </LoadedAnimation>
   }
-
-  if (animate || !hours) return <LoadingAnimation animate={animate}>{mapHours(dummyHours)}</LoadingAnimation>
-  return <LoadedAnimation animate={animate}>{mapHours(hours)}</LoadedAnimation>
 }
 
 export default Hours

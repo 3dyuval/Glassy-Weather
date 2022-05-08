@@ -1,18 +1,54 @@
-.button {
-	transform: scale(1);
-	svg {
-		transform: scale(0.75);
-		margin: $pad1;
-	}
-	background: none;
-	color: inherit;
+@mixin button {
+	min-height: 50px;
+	font-size: $font-100;
+	line-height: 21px;
+	margin: 0px 10px;
+	border-radius: $rad-1;
 	border: none;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-	transition: 0.25s ease-in-out;
+	box-shadow: $box-shadow-default;
+
+	&.hidden {
+		opacity: 0%;
+		transition: opacity $animation-duration3;
+	}
 
 	&:hover {
-		// background-color: $netural-color;
+		color: $col-200;
+		box-shadow: $box-shadow-hover;
+		transition: box-shadow $animation-duration2;
 	}
+
+	&:active {
+		color: $col-300;
+		transition: box-shadow $animation-duration3;
+	}
+
+	&:disabled {
+		color: $col-400;
+		box-shadow: $box-shadow-default;
+	}
+}
+
+.btn-primary {
+	@include button;
+	background-color: var(--primary-color);
+	color: $col-100;
+}
+
+.btn-secondary {
+	@include button;
+	background-color: var(--secondary-color);
+	color: $col-200;
+}
+
+.btn-primary2 {
+	@include button;
+	background-color: var(--primary-color2);
+	color: $col-100;
+}
+
+.btn-secondary2 {
+	@include button;
+	background-color: var(--secondary-color2);
+	color: $col-200;
 }

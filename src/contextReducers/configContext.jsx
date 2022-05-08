@@ -9,6 +9,7 @@ ConfigContext.displayName = "Stats filter configured by user"
 
 export function ConfigProvider({ children }) {
 
+    //reducer actions
     const [userConfig, dispatchUserConfig] = useReducer(reducer, [],
         () => {
             const storage = JSON.parse(localStorage.getItem("userConfig"))
@@ -18,8 +19,7 @@ export function ConfigProvider({ children }) {
 
     //persist
     useEffect(() => {
-        if (!userConfig) return
-        localStorage.setItem("userConfig", JSON.stringify(userConfig))
+        localStorage.setItem("userConfig", JSON.stringify(userConfig || defaultData.DEFAULT_CONFIG))
     }, [userConfig])
 
     const value = { userConfig, dispatchUserConfig }

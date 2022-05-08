@@ -23,9 +23,7 @@ export default function ManageWrapper(props) {
     }
   })
 
-  return (
-    <div className="add-city">
-      {childrenWithProps}
-    </div>
-  )
+  return { childrenWithProps }
+
+
 }

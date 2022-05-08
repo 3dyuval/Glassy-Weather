@@ -13,14 +13,14 @@ function NavBar(props) {
 
             <ul className="navbar">
                 {(location.pathname !== '/') &&
-                    <li className="button">
+                    <li className="nav-button">
                         <Link to="/">
                             <ArrowIcon />
                         </Link>
                     </li>
                 }
                 {(location.pathname === '/') &&
-                    <li className="button">
+                    <li className="nav-button">
                         <Link to="./manage" >
                             <MenuIcon />
                         </Link>
@@ -28,7 +28,7 @@ function NavBar(props) {
                 }
                 {(location.pathname === '/manage') &&
                     <Link to='/manage/configuration' >
-                        <li className="button">
+                        <li className="nav-button">
                             <FilterIcon />
                         </li>
                     </Link>
