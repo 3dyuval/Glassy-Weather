@@ -15,7 +15,11 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	overflow: auto; /* Enable scroll if needed */
-	background-color: $col-400;
+	padding: $pad1;
+	border-radius: $rad-2;
+	background-color: var(--bg-col-200);
+	box-shadow: 0px -3px 12px rgba(170, 174, 182, 0.7),
+		0px 4px 12px rgba(151, 169, 255, 0.75), 0px 2px 4px rgba(115, 140, 255, 0.4);
 }
 
 .modal-content {
