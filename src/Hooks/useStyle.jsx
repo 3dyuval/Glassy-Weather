@@ -10,13 +10,13 @@ const reducer = (state, action) => {
             return { ...state, ...action.payload.graphic }
         }
         case "disable": {
-            return { disabled: true }
+            return { ...state, disabled: true }
         }
         case "darkMode": {
             return { ...state, darkMode: true }
         }
         default: {
-            throw Error(`Unhandled action type: ${action.type}`)
+            return state
         }
     }
 
