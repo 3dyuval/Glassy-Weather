@@ -15,7 +15,7 @@ function Main() {
     useEffect(() => {
         //get the city name from url
         if (typeof city !== "string") return
-        if (!cities.find(itm => itm.name.toLowerCase() === city.toLowerCase())) {
+        if (cities && !cities.find(itm => itm.name.toLowerCase() === city.toLowerCase())) {
             addCity(city)
         }
     }, [])

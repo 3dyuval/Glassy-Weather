@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode }) => {
         copy({
           targets: [{ src: 'src/assets/WeatherConditions', dest: 'dist/assets' },
           { src: 'src/assets/colors', dest: 'dist/assets' },
-          { src: 'src/assets/data', dest: 'dist/assets' }],
+          { src: 'src/assets/weather-icons', dest: 'dist/assets/weather-icons' },],
           hook: 'writeBundle'
         }),
       ]
