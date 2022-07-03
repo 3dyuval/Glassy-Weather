@@ -1,4 +1,4 @@
-import codes from "assets/weather-icons/"
+import codes from "/assets/weather-icons/"
 
 const URL = {
     DEVELOPMENT: {
@@ -13,12 +13,12 @@ const URL = {
     },
     PRODUCTION: {
         LARGE: {
-            DAY: 'assets/weather-icons/large/day/',
-            NIGHT: 'assets/weather-icons/large/night/',
+            DAY: '/assets/weather-icons/large/day/',
+            NIGHT: '/assets/weather-icons/large/night/',
         },
         SMALL: {
-            DAY: 'assets/weather-icons/small/day/',
-            NIGHT: 'assets/weather-icons/small/night/',
+            DAY: '/assets/weather-icons/small/day/',
+            NIGHT: '/assets/weather-icons/small/night/',
         }
     }
 }
