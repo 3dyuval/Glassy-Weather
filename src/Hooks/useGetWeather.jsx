@@ -36,13 +36,14 @@ export function useGetWeather() {
 
 
     function getWeatherData(data) {
+        const { location, forecast, current } = data
         return ({
             metadata: data.location,
-            hours: Utils.getHours([...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]),
+            hours: Utils.getHours([...forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]),
             days: Utils.getDays(data),
-            stats: Utils.getStats(data.current),
-            graphic: Utils.getGraphic(data.current.condition.code, false, Utils.dayOrNight(data.location.localtime)),
-            color: Utils.colors.byTime(data.location.localtime)
+            stats: Utils.getStats(current),
+            graphic: Utils.getGraphic(current.condition.code, false, Utils.dayOrNight(location.localtime)),
+            color: Utils.colors.byTime(location.localtime)
         })
     }
 

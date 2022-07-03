@@ -1,16 +1,18 @@
 .carousel {
 	// overflow-x: hidden;
-	height: 100%;
+	height: auto;
 	z-index: 100;
-}
-
-.inner {
-	white-space: nowrap;
 }
 
 .carousel-item {
 	display: inline-flex;
 	justify-content: center;
+	width: 100vw;
+}
+
+.inner {
+	white-space: nowrap;
+	// overflow-x: hidden;
 }
 
 .indicators {

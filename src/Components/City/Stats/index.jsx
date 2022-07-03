@@ -15,11 +15,12 @@ export default function Stats({ stats }) {
     setFilteredStats(updatedFiltered)
   }, [stats])
 
-  return <div className="stats">
-    <button onClick={() => {
-      setToggleAllStats(!toggleAllStats)
-    }}>show All Available Stats</button>
+  const ButtonToggleStats = () => <button onClick={() => {
+    setToggleAllStats(!toggleAllStats)
+  }}>show All Available Stats</button>
 
+
+  return <div className="stats">
     <ViewStats statsList={toggleAllStats ? stats : userConfiguratedFilteredStats} />
   </div>
 }

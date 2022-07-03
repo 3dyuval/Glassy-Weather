@@ -1,6 +1,10 @@
 .background-graphic {
-	// position: relative;
-	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translate(50vw, 69vh) scale(300%);
+	// bottom: 0;
+	// right: 0;
 }
 
 #bg-root {

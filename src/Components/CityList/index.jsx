@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import clsx from 'clsx'
 import { useContext } from 'react';
-import { CitiesContext, citiesActions } from '../../contextReducers';
+import { CitiesContext, citiesReducer } from '../../contextReducers';
 
 export default function CityList() {
 
@@ -33,7 +33,7 @@ export default function CityList() {
 const CityListItem = (props) => {
     const { name, id, editMode } = props
 
-    const { dispatchCities } = useContext(CitiesContext)
+    const { dispatchCities, actionTypes } = useContext(CitiesContext)
 
     const navigate = useNavigate()
 
@@ -43,14 +43,14 @@ const CityListItem = (props) => {
     })
 
     return (
-        <li className="list-item city-list-item">
-            <span className="city-name" onClick={() => navigate(`/${name}`)} >{name}</span>
+        <li className="list-item city-list-item" onClick={() => navigate(`/weather/${name}`)} >
+            <span className="city-name">{name}</span>
             <input
                 type="button"
                 value="DELETE"
                 className={classNames}
                 disabled={!editMode}
-                onClick={() => dispatchCities({ type: citiesActions.DELETE_CITY, payload: id })}
+                onClick={() => dispatchCities({ type: actionTypes.DELETE_CITY, payload: id })}
             ></input>
         </li >
 

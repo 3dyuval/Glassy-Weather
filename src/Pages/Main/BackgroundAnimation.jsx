@@ -3,17 +3,30 @@ import { animated as a, useTransition } from "react-spring"
 import "./BackgroundAnimation.scss"
 import { createPortal } from "react-dom"
 
+//TODO move this component
 function Animation({ show, setShow, graphic }) {
 
 
-    const transition = useTransition(show, {
+
+    const moveTransition = {
         from: { transform: "translate(50vw, 150vh) scale(300%)", opacity: 0 },
         enter: { transform: "translate(50vw, 69vh) scale(300%)", opacity: 1 },
         leave: { transform: "translate(50vw, 150vh) scale(300%)", opacity: 0 },
         reset: true,
         onRest: () => setShow(true),
         delay: 500,
-    })
+    }
+
+    const fadeTransition = {
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+        reset: true,
+        onRest: () => setShow(true),
+        delay: 500,
+    }
+
+    const transition = useTransition(show, fadeTransition)
 
     return transition((style, item) => <a.div style={{ position: 'absolute', transformOrigin: 'center', ...style }} >
         <img className="background-graphic" src={graphic}></img>

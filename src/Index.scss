@@ -5,7 +5,8 @@
 @import './Pages/Main/Carousel.scss';
 @import './Pages/Main/BackgroundAnimation.scss';
 @import './SCSS/App.scss';
-@import './Components/Header/NavButton.scss';
+@import './Components/Layout/NavButton.scss';
+@import './Components/Layout/Header.scss';
 @import './Pages/Manage/Manage.scss';
 @import './Components/UserConfiguration/UserConfiguration.scss';
 @import './Components/City/City.scss';
@@ -14,6 +15,5 @@
 @import './Components/City/Days/Days.scss';
 @import './Components/City/Hours/Hours.scss';
 @import './Components/Modal/Modal.scss';
-@import './Components/Header/Header.scss';
 @import './Components/CityList/City-list-item.scss';
 @import './SCSS/Button.scss';

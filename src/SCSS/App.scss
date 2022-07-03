@@ -10,7 +10,7 @@ body {
 	overflow: hidden;
 	color: var(--txt-col-400);
 	#bg-root {
-		@include animation-transition;
+		@include animation-transition3;
 	}
 
 	.city {
@@ -59,26 +59,22 @@ html {
 	font-family: Roboto;
 }
 
-.content {
-	margin: 0 auto;
-	max-width: max-content;
+a:link {
+	color: var(--primary-color);
+	text-decoration: none;
 }
-// a:link {
-// 	color: var(--primary-color1);
-// 	text-decoration: none;
-// }
 
-// a:visited {
-// 	color: $col-visited;
-// }
+a:visited {
+	color: var(--secondary-color);
+}
 
-// a:hover {
-// 	color: $$col-hover;
-// }
+a:hover {
+	color: var(--primary-color2);
+}
 
-// a:active {
-// 	color: $col-active;
-// }
+a:active {
+	color: var(--secondary-color2);
+}
 
 .toast-item {
 	z-index: 1000 !important;

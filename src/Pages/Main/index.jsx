@@ -1,41 +1,31 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import BackgroundAnimation from './BackgroundAnimation'
 import Carousel, { CarouselItem } from './CarouselWrapper'
 import City from '../../Components/City'
 import { CitiesContext } from '../../contextReducers'
-import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAddCity } from '../../Hooks'
-import { useEffect } from 'react'
 
-function Main(props) {
+function Main() {
 
     const { weather, isLoading, cities, setSelectedCity, selectedCity } = useContext(CitiesContext)
-    const param = useParams()
-
+    const { city } = useParams()
     const { addCity } = useAddCity()
 
     useEffect(() => {
-        //get the city from url
-        if (param.city) {
-            //check if it already exists in the list
-            if (cities.find(itm => itm.name.toLowerCase() === param.city.toLowerCase())) {
-                setSelectedCity(param.city)
-            }
-            else {
-                addCity(param.city)
-            }
+        //get the city name from url
+        if (typeof city !== "string") return
+        if (!cities.find(itm => itm.name.toLowerCase() === city.toLowerCase())) {
+            addCity(city)
         }
     }, [])
 
     return (<>
-        <Carousel
-            cities={cities}
-            setSelectedCity={setSelectedCity}
-        >
-            {cities.map(itm => (
-                <CarouselItem key={itm.id}>
-                    <City key={itm.id}
+        <Carousel>
+            {cities.map(city => (
+                <CarouselItem key={city.id}>
+                    <City
+                        key={city.id}
                         isLoading={isLoading}
                         weather={weather}
                         selectedCity={selectedCity}

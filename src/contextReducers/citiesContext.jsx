@@ -1,9 +1,11 @@
-import React, { useState, createContext, useEffect, useReducer, useLayoutEffect } from 'react'
-import { citiesReducer } from './citiesReducer'
+import { useState, createContext, useEffect, useReducer, useLayoutEffect, useMemo } from 'react'
+import { citiesReducer, actionTypes } from './citiesReducer'
 import * as defaultData from '../constants'
-import { useGetWeather, useColor } from "../Hooks/"
+import { useGetWeather, useStyle } from "../Hooks/"
 
-
+//TODO refactor this into WeatherContext
+//It will be in charge of fetching Weather
+// and changing the theme according the Weather
 export const CitiesContext = createContext()
 CitiesContext.displayName = "Cities to display"
 
@@ -17,31 +19,40 @@ export function CitiesProvider({ children }) {
         }
     )
 
-    //initalize selected city by name
-    const [selectedCity, setSelectedCity] = useState(() => cities[0].name || defaultData.DEFAULT_CITIES[0])
-    const { fetchWeather, weather } = useGetWeather()
-    const { updateColor } = useColor()
+
+    //initalize selected city by object
+    const [selectedCity, setSelectedCity] = useState(() => cities.find(itm => itm.selected) || defaultData.DEFAULT_CITIES[0])
+    const { fetchWeather, weather, isLoading } = useGetWeather()
+    const { setColor } = useStyle()
+
+
     //persist
     useEffect(() => {
         localStorage.setItem("cities", JSON.stringify(cities || defaultData.DEFAULT_CITIES))
+        setSelectedCity(cities.find(itm => itm.selected))
     }, [cities])
+
+    const memoizedFetchWeather = useMemo(() => {
+        fetchWeather(selectedCity.name)
+    }, [selectedCity])
+
+    useLayoutEffect(() => {
+        memoizedFetchWeather
+        document.title = `Weather in ${selectedCity.name}`
+    }, [selectedCity])
 
     useEffect(() => {
         if (!weather) return
-        updateColor(weather.color.name)
+        setColor(weather.metadata.localtime)
     }, [weather])
 
-    useLayoutEffect(() => {
-        fetchWeather(selectedCity)
-        document.title = `Weather in ${selectedCity}`
-    }, [selectedCity])
 
+    // when the selected day changes
     //pass context to children
-    const value = { cities, weather, selectedCity, setSelectedCity, dispatchCities }
+    const value = { cities, weather, selectedCity, setSelectedCity, dispatchCities, actionTypes, isLoading }
     return (
         <CitiesContext.Provider value={value} >
             {children}
         </CitiesContext.Provider>
     )
 }
-

@@ -1,6 +1,9 @@
 .city-list-item {
 	background-color: $col-100;
 	color: $col-500;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 // toggle on when going to edit mode

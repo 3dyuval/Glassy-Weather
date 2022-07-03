@@ -11,8 +11,8 @@ function City({ weather, isLoading, selectedCity }) {
   return (
     <div className="city">
       <div className="city-header">
-        <h1>{weather?.metadata?.name ?? selectedCity}</h1>
-        <h2>{weather?.metadata?.localtime ?? `Time in ${selectedCity}`}</h2>
+        <h1>{weather?.metadata?.name ?? selectedCity.name}</h1>
+        <h2>{weather?.metadata?.localtime ?? `Time in ${selectedCity.name}`}</h2>
       </div>
       <div className="city-body">
         <Days

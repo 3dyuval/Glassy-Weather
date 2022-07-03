@@ -30,9 +30,8 @@ function UserConfiguration() {
                     name={itm.statName}
                     className="toggleStat"
                     statName={itm.statName}
+                    onChange={e => cfg.dispatchUserConfig({ type: 'toggle', payload: { statName: e.target.value, checked: e.target.checked } })}
                     checked={cfg.userConfig.stats.some(configStat => configStat.statName === itm.statName)}
-                    onClick={e => cfg.dispatchUserConfig({ type: 'toggle', payload: { statName: e.target.value, checked: e.target.checked } })
-                    }
                 />
             )
         })}

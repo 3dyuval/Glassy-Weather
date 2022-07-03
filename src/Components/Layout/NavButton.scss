@@ -1,0 +1,23 @@
+.nav-button {
+	transform: scale(1);
+	svg {
+		transform: scale(0.75);
+		margin: $pad1;
+	}
+	background: none;
+	color: inherit;
+	border: none;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+	transition: $animation-duration3 ease-out;
+
+	&:hover {
+		background-color: var(--primary-color);
+		border-radius: $rad-3;
+		svg {
+			transform: scale(0.7);
+			transition-duration: $animation-duration4;
+		}
+	}
+}

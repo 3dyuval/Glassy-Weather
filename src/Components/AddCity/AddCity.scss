@@ -1,0 +1,19 @@
+.add-city-form {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-direction: row-reverse;
+	width: fit-content;
+}
+
+input.search,
+.add-city-form {
+	width: 100%;
+}
+
+input.btn-add-city {
+	--width: 100px;
+	position: relative;
+	width: var(--width);
+	transform: translateX(calc(var(--width) * -1));
+}

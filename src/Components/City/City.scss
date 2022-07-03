@@ -13,13 +13,13 @@
 	overflow: hidden;
 	z-index: 1;
 	max-width: 80vw;
+	max-height: 75vh;
 }
 .city-header {
 	margin: 1em;
 }
 
 .city-primary {
-	scrolling: horizontally;
 	overflow-x: auto;
 	overflow-y: hidden;
 	webkit-overflow-scrolling: touch;
@@ -49,7 +49,7 @@
 		max-width: 95%;
 	}
 	.city-body {
-		flex-direction: column-reverse;
+		flex-direction: column;
 	}
 	.days {
 		width: auto;

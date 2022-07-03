@@ -5,9 +5,10 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
+    "@storybook/addon-essentials",
   ],
   "core": {
     "builder": "@storybook/builder-vite"
   }
 }
+

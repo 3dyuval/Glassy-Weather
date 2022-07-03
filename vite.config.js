@@ -28,6 +28,9 @@ export default defineConfig(({ command, mode }) => {
 
   } else {
     return {
+      server: {
+        port: 3001
+      },
       plugins: [
         react(),
         svgr()

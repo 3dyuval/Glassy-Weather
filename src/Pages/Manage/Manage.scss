@@ -1,8 +1,15 @@
 .manage {
-	width: 100%;
+	width: 50vw;
 	margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+	.manage {
+		width: 80vw;
+	}
+}
+
+//TODO change color of background by city time
 .city-list {
 	border: 1px solid $col-300;
 	padding: $pad2;

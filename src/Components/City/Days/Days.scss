@@ -1,5 +1,21 @@
+.city-days {
+	margin: $pad1;
+	display: flex;
+	flex-direction: column;
+	min-width: 300px;
+}
+
+@media (max-width: 700px) {
+	.city-days {
+		flex-direction: row;
+		justify-content: stretch;
+	}
+}
+
 .day {
+	background-color: var(--bg-col-200);
 	padding: $pad1;
+	width: 100%;
 	.bottom {
 		opacity: 0;
 		display: hidden;

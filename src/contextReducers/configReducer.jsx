@@ -1,7 +1,6 @@
 import { notifyUser } from "../utils"
 
 
-//TODO: refactor everything into one global state
 const actions = {
   CITY: {
     ADD: 'add',
@@ -21,7 +20,9 @@ const actions = {
 
 
 
-
+// this reducer is used to:
+// viewing and hiding specific weather stats
+// toggling dark mode
 export function reducer(state, action) {
   switch (action.type) {
     case 'add-stat': {

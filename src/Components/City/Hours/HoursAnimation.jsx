@@ -1,7 +1,7 @@
 import React from "react"
 import { animated as a, useTrail, useTransition } from "react-spring"
 
-function LoadedAnimation({ children }) {
+function Loaded({ children }) {
 
     const [transition, api] =
         useTransition(React.Children.toArray(children),
@@ -25,7 +25,7 @@ function LoadedAnimation({ children }) {
     </div>)
 }
 
-function LoadingAnimation({ children }) {
+function Loading({ children }) {
     const hours = React.Children.toArray(children)
     const [trail, api] = useTrail(hours.length,
         () => ({
@@ -45,5 +45,11 @@ function LoadingAnimation({ children }) {
     )
 }
 
+const memoLoading = React.memo(Loading)
+const memoLoaded = React.memo(Loaded)
 
-export { LoadingAnimation, LoadedAnimation }
+
+export {
+    memoLoading as LoadingAnimation,
+    memoLoaded as LoadedAnimation
+}
