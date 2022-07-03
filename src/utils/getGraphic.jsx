@@ -1,4 +1,4 @@
-import codes from "/src/assets/weather-icons/"
+import codes from "./assets/weather-icons/"
 
 const URL = {
     DEVELOPMENT: {
