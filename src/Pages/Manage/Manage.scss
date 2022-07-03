@@ -1,5 +1,5 @@
 .manage {
-	width: 50vw;
+	width: 80vw;
 	margin: 0 auto;
 }
 
@@ -16,6 +16,7 @@
 	// background-color: rgba($netural-color, 0.8);
 	.city-item {
 		padding: $pad1;
+		width: 100%;
 	}
 
 	.delete-city {

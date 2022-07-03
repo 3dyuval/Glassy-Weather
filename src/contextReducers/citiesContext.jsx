@@ -32,12 +32,9 @@ export function CitiesProvider({ children }) {
         setSelectedCity(cities.find(itm => itm.selected))
     }, [cities])
 
-    const memoizedFetchWeather = useMemo(() => {
-        fetchWeather(selectedCity.name)
-    }, [selectedCity])
 
     useLayoutEffect(() => {
-        memoizedFetchWeather
+        fetchWeather(selectedCity.name)
         document.title = `Weather in ${selectedCity.name}`
     }, [selectedCity])
 
