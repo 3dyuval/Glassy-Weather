@@ -26,7 +26,7 @@ export default defineConfig(({ command, mode }) => {
       ],
       build: {
         chunkSizeWarningLimit: 2500,
-        emptyOutDir: '../dist/'
+        outDir: '../dist/'
       },
       root: 'src/',
     }
