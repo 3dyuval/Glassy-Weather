@@ -8,7 +8,6 @@ import copy from 'rollup-plugin-copy'
 export default defineConfig(({ command, mode }) => {
   if (command === 'build') {
     return {
-      root: 'src/',
       plugins: [
         react({
           babel: {
@@ -24,7 +23,12 @@ export default defineConfig(({ command, mode }) => {
           { src: 'src/assets/weather-icons', dest: 'dist/assets' },],
           hook: 'writeBundle'
         }),
-      ]
+      ],
+      build: {
+        chunkSizeWarningLimit: 2500,
+        emptyOutDir: '../dist/'
+      },
+      root: 'src/',
     }
 
   } else {
