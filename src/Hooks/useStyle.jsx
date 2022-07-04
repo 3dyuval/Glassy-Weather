@@ -1,5 +1,5 @@
 import { useReducer, useLayoutEffect } from "react"
-import { colors, getGraphic, dayOrNight } from "../utils"
+import { colors } from "../utils"
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -33,7 +33,6 @@ function useStyle() {
 
     //Update the style sheet and body class every state change
     useLayoutEffect(() => {
-        //TODO: connect to dark mode, add a disable button
         document.body.className = style.color.name
         colors.setStyleSheet(style.color.url)
     }, [style])
@@ -48,10 +47,6 @@ function useStyle() {
         })
     }
 
-    //TODO expose this directly to <BackgroundAnimation />
-    //And rerender this animation according to the day
-    //useStyle => WeatherContext => <BackgroundAnimation />
-    //useStyle => WeatherContext => <Day />
     const setGraphic = (graphic) => {
         dispatch({
             type: useStyle.actionTypes.SETGRAPHIC,

@@ -1,4 +1,4 @@
-const codes = [
+export const codes = [
 	{
 		"code": 1000,
 		"day": "Sunny",
@@ -288,5 +288,3 @@ const codes = [
 		"icon": 395
 	}
 ]
-
-export default codes
