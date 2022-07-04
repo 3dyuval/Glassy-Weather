@@ -8,6 +8,7 @@ import copy from 'rollup-plugin-copy'
 export default defineConfig(({ command, mode }) => {
   if (command === 'build') {
     return {
+      root: 'src/',
       plugins: [
         react({
           babel: {
