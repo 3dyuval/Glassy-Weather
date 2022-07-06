@@ -4,10 +4,11 @@ import Stats from "./Stats"
 import Hours from "./Hours"
 
 
-function City({ weather, isLoading, selectedCity }) {
+function City({ weather, selectedCity, isLoading, show }) {
 
   const [selectedDay, setSelectedDay] = useState(0)
 
+  if (!show) return <></>
   return (
     <div className="city">
       <div className="city-header">

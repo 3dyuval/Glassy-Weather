@@ -8,7 +8,7 @@ import { useAddCity } from '../../Hooks'
 
 function Main() {
 
-    const { weather, isLoading, cities, setSelectedCity, selectedCity } = useContext(CitiesContext)
+    const { weather, cities, isLoading, selectedCity } = useContext(CitiesContext)
     const { city } = useParams()
     const { addCity } = useAddCity()
 
@@ -22,20 +22,16 @@ function Main() {
 
     return (<>
         <Carousel>
-            {cities.map(city => (
-                <CarouselItem key={city.id}>
-                    <City
-                        key={city.id}
-                        isLoading={isLoading}
-                        weather={weather}
-                        selectedCity={selectedCity}
-                    />
-                </CarouselItem>)
-            )}
+            {cities.map(city => {
+                console.log(selectedCity)
+                return <CarouselItem key={city.id}>
+                    <City show={city.name === selectedCity.name} key={city.id} selectedCity={selectedCity} isLoading={isLoading} weather={weather} />
+                </CarouselItem>
+            }
+            )
+            }
         </Carousel>
-
         {weather && <BackgroundAnimation graphic={weather.graphic} ></BackgroundAnimation>}
-
 
     </>)
 }
