@@ -7,6 +7,7 @@ ________________
 ##Backend
 --server.js //node with secret key
 
+```
 ##Frontend
 --src
 ---assets     // css, svg
@@ -19,8 +20,8 @@ ________________
 ----SCSS
 ----utils 
 ----constants
-
+```
 
 [Design file 🔗](https://www.figma.com/file/p0IRC6SVcxFrRqwbfLtdMF/Weather-App?node-id=342%3A895)
 
-Design Prview (./weather_doc.jpg)
+[Design Preview](./weather_doc.jpg)
