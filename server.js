@@ -34,6 +34,8 @@ const fetchApi = async (url) => {
     }
 }
 
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'dist', 'index.html')));
+
 app.listen(process.env.PORT || 8000, () => {
     console.log(`server is listening at port: ${process.env.PORT || 8000}`)
 })
