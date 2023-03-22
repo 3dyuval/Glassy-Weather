@@ -12,7 +12,7 @@ export default defineConfig(({ command, mode }) => {
         react({
           babel: {
             plugins: [
-              ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }],
+              [{ runtime: 'automatic' }],
             ]
           }
         }),
