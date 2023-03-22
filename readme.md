@@ -1,15 +1,10 @@
 # Glassy Weather
 
-[DEMO](https://glassy-weather.herokuapp.com/)
+[SITE URL](https://glassy-weather.netlify.app/)
 
 Project structure
 ________________
 
-```
-##Backend
--server.js //node with secret key
-
-##Frontend
 -src
 --assets    
 ---Components 
