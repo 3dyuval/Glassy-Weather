@@ -23,7 +23,6 @@ function Main() {
     return (<>
         <Carousel>
             {cities.map(city => {
-                console.log(selectedCity)
                 return <CarouselItem key={city.id}>
                     <City show={city.name === selectedCity.name} key={city.id} selectedCity={selectedCity} isLoading={isLoading} weather={weather} />
                 </CarouselItem>

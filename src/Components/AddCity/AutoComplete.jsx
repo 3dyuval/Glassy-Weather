@@ -48,7 +48,6 @@ export default function AutoComplete(props) {
     // Navigate to cities from user's list
     //Do not show world-cities.json matches if they are on the user's list
     function handleItemClick(item) {
-        console.log(item)
         navigate(`weather/${item}`)
     }
 
