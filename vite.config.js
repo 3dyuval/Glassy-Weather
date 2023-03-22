@@ -9,13 +9,7 @@ export default defineConfig(({ command, mode }) => {
   if (command === 'build') {
     return {
       plugins: [
-        react({
-          babel: {
-            plugins: [
-              [{ runtime: 'automatic' }],
-            ]
-          }
-        }),
+        react(),
         svgr(),
         copy({
           targets: [{ src: 'src/assets/WeatherConditions', dest: 'dist/assets' },
