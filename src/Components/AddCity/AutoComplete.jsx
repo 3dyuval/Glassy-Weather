@@ -44,7 +44,6 @@ export default function AutoComplete(props) {
         setIsLoading(false)
     }, [input])
 
-    //TODO  useAddCity hook directly on search results
     // Navigate to cities from user's list
     //Do not show world-cities.json matches if they are on the user's list
     function handleItemClick(item) {

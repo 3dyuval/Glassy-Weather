@@ -3,7 +3,6 @@ import { animated as a, useTransition } from "react-spring"
 import "./BackgroundAnimation.scss"
 import { createPortal } from "react-dom"
 
-//TODO move this component
 function Animation({ show, setShow, graphic }) {
 
 

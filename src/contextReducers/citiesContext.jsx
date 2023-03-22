@@ -3,7 +3,6 @@ import { citiesReducer, actionTypes } from './citiesReducer'
 import * as defaultData from '../constants'
 import { useGetWeather, useStyle } from "../Hooks/"
 
-//TODO refactor this into WeatherContext
 //It will be in charge of fetching Weather
 // and changing the theme according the Weather
 export const CitiesContext = createContext()

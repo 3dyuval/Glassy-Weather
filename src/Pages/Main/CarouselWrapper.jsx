@@ -3,7 +3,6 @@ import { useSwipeable } from "react-swipeable";
 import { useSpring, animated as a } from "react-spring";
 import { CitiesContext } from "../../contextReducers";
 import { useParams } from "react-router-dom";
-//TODO move this component
 export function CarouselItem({ children }) {
   return (
     <div className="carousel-item">
@@ -31,7 +30,6 @@ function Carousel({ children }) {
     setSelectedCity(cities[activeIndex]);
   }, [activeIndex]);
 
-  //TODO binding is both ways right now. I need to think about selectedCity state and where it changes
   // How it flows down, and how this component decides to switch to the selected city
   useEffect(() => {
     if (typeof city === "string") {
